@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30. Geburtstagseinladung</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Playfair+Display:ital,wght@0,700;1,700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #c4bcb3;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* ══════════════════════════════
+       CARD
+    ══════════════════════════════ */
+    .card {
+      width: 400px;
+      height: 710px;
+      background: #f3ede4;
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.12),
+        0 8px 20px rgba(0,0,0,0.18),
+        0 20px 60px rgba(0,0,0,0.22);
+      /* Subtle warm vignette */
+      background-image:
+        radial-gradient(ellipse at 50% 0%,   rgba(255,252,242,0.85) 0%, transparent 65%),
+        radial-gradient(ellipse at 0%   100%, rgba(210,198,183,0.45) 0%, transparent 60%),
+        radial-gradient(ellipse at 100% 100%, rgba(200,190,175,0.35) 0%, transparent 55%);
+    }
+
+    /* Paper grain overlay */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 99;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    /* ══════════════════════════════
+       BUNTING
+    ══════════════════════════════ */
+    .bunting {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 30;
+    }
+
+    /* ══════════════════════════════
+       DISCO BALLS
+    ══════════════════════════════ */
+    .db {
+      position: absolute;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 14;
+    }
+
+    /* Metallic sphere base */
+    .db::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 37% 30%,
+        rgba(255,255,255,0.95) 0%,
+        rgba(225,225,225,0.85) 12%,
+        rgba(180,180,180,0.75) 28%,
+        rgba(130,130,130,0.80) 48%,
+        rgba(80,80,80,0.90)  70%,
+        rgba(40,40,40,1.00)  100%
+      );
+    }
+
+    /* Mirror-tile grid */
+    .db::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background-image:
+        repeating-linear-gradient(0deg,
+          transparent 0px, transparent 7px,
+          rgba(0,0,0,0.22) 7px, rgba(0,0,0,0.22) 8px),
+        repeating-linear-gradient(90deg,
+          transparent 0px, transparent 7px,
+          rgba(0,0,0,0.22) 7px, rgba(0,0,0,0.22) 8px);
+      box-shadow: inset 6px 6px 18px rgba(255,255,255,0.35);
+    }
+
+    .db-tl1 { width: 108px; height: 108px; top: -40px; left: -40px; }
+    .db-tl2 { width:  74px; height:  74px; top:  58px; left:   6px; }
+    .db-tr1 { width: 118px; height: 118px; top: -38px; right: -38px; }
+    .db-bl1 { width:  95px; height:  95px; bottom: -24px; left: -24px; }
+    .db-br1 { width: 120px; height: 120px; bottom: -32px; right: -32px; }
+    .db-br2 { width:  78px; height:  78px; bottom:  72px; right:   6px; }
+
+    /* Hanging strings */
+    .db-string {
+      position: absolute;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, #aaa 30%, #aaa);
+      z-index: 13;
+    }
+    .str-tl2 { height: 30px; top: 58px; left: 43px; }
+    .str-tr1 { height: 24px; top: 40px; right: 50px; }
+    .str-br2 { height: 28px; bottom: 148px; right: 45px; }
+
+    /* ══════════════════════════════
+       BALLOONS
+    ══════════════════════════════ */
+    .balloons {
+      position: absolute;
+      top: -15px;
+      right: 92px;
+      z-index: 16;
+      width: 148px;
+      height: 110px;
+    }
+
+    .balloon {
+      position: absolute;
+      border-radius: 50% 50% 48% 48%;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1.5px;
+      height: 20px;
+      background: #bbb;
+    }
+
+    /* Shiny highlight on each balloon */
+    .balloon::before {
+      content: '';
+      position: absolute;
+      top: 18%;
+      left: 22%;
+      width: 28%;
+      height: 20%;
+      background: rgba(255,255,255,0.55);
+      border-radius: 50%;
+      transform: rotate(-30deg);
+    }
+
+    .b1 {
+      width: 46px; height: 56px;
+      background: radial-gradient(circle at 35% 30%, #fdd5e2, #f48fb1 45%, #c2185b 90%);
+      top: 22px; left: 4px;
+    }
+    .b2 {
+      width: 52px; height: 64px;
+      background: radial-gradient(circle at 35% 30%, #fce4ec, #f06292 45%, #ad1457 90%);
+      top: -5px; left: 46px;
+    }
+    .b3 {
+      width: 44px; height: 54px;
+      background: radial-gradient(circle at 35% 30%, #fdd5e2, #f48fb1 45%, #c2185b 90%);
+      top: 18px; left: 92px;
+    }
+    .b4 {
+      width: 48px; height: 58px;
+      background: radial-gradient(circle at 35% 30%, #fce4ec, #ec407a 45%, #880e4f 90%);
+      top: -28px; left: 64px;
+    }
+
+    /* ══════════════════════════════
+       PHOTO PLACEHOLDER
+    ══════════════════════════════ */
+    .photo-wrap {
+      position: absolute;
+      top: 92px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 215px;
+      height: 268px;
+      z-index: 10;
+      border-radius: 3px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    }
+
+    .photo-inner {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #d4d4d4 0%, #aaa 45%, #777 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.72);
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .photo-inner svg {
+      opacity: 0.55;
+    }
+
+    /* ══════════════════════════════
+       SIDE DECORATIONS
+    ══════════════════════════════ */
+    .deco {
+      position: absolute;
+      z-index: 22;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .deco-cocktail {
+      top: 198px;
+      left: 8px;
+      font-size: 56px;
+      transform: rotate(-10deg);
+      filter: hue-rotate(290deg) saturate(1.4) brightness(1.1);
+    }
+
+    .deco-cupcake {
+      top: 252px;
+      right: 8px;
+      font-size: 54px;
+      transform: rotate(7deg);
+    }
+
+    /* ══════════════════════════════
+       SPARKLE STARS
+    ══════════════════════════════ */
+    .spark {
+      position: absolute;
+      z-index: 24;
+      color: #f06292;
+      line-height: 1;
+      user-select: none;
+      font-style: normal;
+    }
+
+    .sp1 { top:  92px; right:  72px; font-size: 24px; transform: rotate(15deg); color: #e91e8c; }
+    .sp2 { top:  75px; right: 168px; font-size: 14px; color: #f48fb1; transform: rotate(-5deg); }
+    .sp3 { bottom: 148px; left:  26px; font-size: 20px; transform: rotate(-12deg); }
+    .sp4 { bottom: 188px; right:  46px; font-size: 17px; color: #e91e8c; }
+    .sp5 { top: 170px; right:  65px; font-size: 11px; color: #f48fb1; }
+    .sp6 { top: 140px; left:  52px; font-size: 13px; transform: rotate(20deg); }
+
+    /* ══════════════════════════════
+       CANDLE FLAMES + BIG "30"
+    ══════════════════════════════ */
+    .candles {
+      position: absolute;
+      top: 328px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 76px;
+      z-index: 27;
+    }
+
+    .flame {
+      font-size: 26px;
+      display: block;
+      animation: flicker 0.75s ease-in-out infinite alternate;
+    }
+
+    @keyframes flicker {
+      from { transform: scale(0.88) rotate(-3deg) translateY(0); }
+      to   { transform: scale(1.12) rotate( 3deg) translateY(-2px); }
+    }
+
+    .big-num {
+      position: absolute;
+      top: 346px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Lilita One', 'Nunito', sans-serif;
+      font-size: 162px;
+      line-height: 0.88;
+      white-space: nowrap;
+      letter-spacing: -8px;
+      z-index: 26;
+      /* Vibrant pink gradient */
+      background: linear-gradient(160deg,
+        #ff80ab 0%,
+        #f48fb1 20%,
+        #ff4081 42%,
+        #e91e8c 60%,
+        #f06292 78%,
+        #ff80ab 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      /* 3-D depth + glow */
+      filter:
+        drop-shadow(3px  5px  0px rgba(194,24,91,0.55))
+        drop-shadow(0px  8px 22px rgba(244,143,177,0.50));
+    }
+
+    /* ══════════════════════════════
+       "BIRTHDAY PARTY" RANSOM NOTE
+    ══════════════════════════════ */
+    .bp-row {
+      position: absolute;
+      top: 488px;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      z-index: 28;
+      padding: 0 8px;
+    }
+
+    .l {
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.25;
+      padding: 1px 4px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    /* Each letter gets a distinct ransom-note style */
+    .lB  { color: #f0a500; font-family: Georgia, serif;           font-style: italic; font-size: 23px; }
+    .li  { background: #f5c800; color: #222; font-family: Arial, sans-serif; font-size: 17px; }
+    .lr  { color: #d93030; font-family: 'Times New Roman', serif; font-style: italic; font-size: 21px; }
+    .lt  { background: #43a047; color: #fff; font-family: Arial, sans-serif; font-size: 18px; }
+    .lh  { background: #1e88e5; color: #fff; font-family: Georgia, serif; font-style: italic; font-size: 20px; }
+    .lD  { background: #f4511e; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+    .lA1 { background: #8e24aa; color: #fff; font-family: 'Times New Roman', serif; font-style: italic; font-size: 21px; }
+    .ly1 { color: #d93030; font-family: Georgia, serif; font-size: 20px; }
+    .gap { display: inline-block; width: 7px; }
+    .lP  { background: #e53935; color: #fff; font-family: Arial, sans-serif; font-size: 20px; padding: 1px 5px; }
+    .lA2 { background: #ffb300; color: #222; font-family: 'Times New Roman', serif; font-size: 19px; }
+    .lR  { color: #43a047; font-family: Arial, sans-serif; font-style: italic; font-weight: 900; font-size: 21px; }
+    .lT  { background: #d81b60; color: #fff; font-family: Georgia, serif; font-size: 20px; }
+    .ly2 { background: #1e88e5; color: #fff; font-family: Arial, sans-serif; font-style: italic; font-size: 17px; }
+
+    /* ══════════════════════════════
+       DETAILS
+    ══════════════════════════════ */
+    .details {
+      position: absolute;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: 28;
+    }
+
+    .det-date {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 23px;
+      font-weight: 700;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      letter-spacing: 0.4px;
+    }
+
+    .det-pipe {
+      color: #444;
+      font-weight: 400;
+      font-size: 20px;
+    }
+
+    .det-loc {
+      font-family: 'Nunito', sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #252525;
+      letter-spacing: 1.8px;
+      margin-top: 7px;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- ── BUNTING ── -->
+  <svg class="bunting" width="400" height="54" viewBox="0 0 400 54"
+       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- String -->
+    <path d="M-5 9 C 40 3, 85 16, 130 9 C 170 3, 210 16, 250 9 C 290 3, 335 16, 375 9 L 405 9"
+          stroke="#a0a0a0" stroke-width="1.4" fill="none"/>
+    <!-- Flags: alternating shades of grey -->
+    <polygon points="10,9  36,9  23,44" fill="#888"/>
+    <polygon points="44,8  70,8  57,43" fill="#767676"/>
+    <polygon points="78,9  104,9  91,44" fill="#8f8f8f"/>
+    <polygon points="112,7 138,7 125,42" fill="#777"/>
+    <polygon points="146,9 172,9 159,44" fill="#888"/>
+    <polygon points="180,8 206,8 193,43" fill="#7a7a7a"/>
+    <polygon points="214,9 240,9 227,44" fill="#868686"/>
+    <polygon points="248,8 274,8 261,43" fill="#747474"/>
+    <polygon points="282,9 308,9 295,44" fill="#8a8a8a"/>
+    <polygon points="316,8 342,8 329,43" fill="#787878"/>
+    <polygon points="350,9 376,9 363,44" fill="#888"/>
+  </svg>
+
+  <!-- ── DISCO BALLS ── -->
+  <!-- hanging strings -->
+  <div class="db-string str-tl2"></div>
+  <div class="db-string str-tr1"></div>
+  <div class="db-string str-br2"></div>
+  <!-- balls -->
+  <div class="db db-tl1"></div>
+  <div class="db db-tl2"></div>
+  <div class="db db-tr1"></div>
+  <div class="db db-bl1"></div>
+  <div class="db db-br1"></div>
+  <div class="db db-br2"></div>
+
+  <!-- ── BALLOONS ── -->
+  <div class="balloons">
+    <div class="balloon b1"></div>
+    <div class="balloon b2"></div>
+    <div class="balloon b3"></div>
+    <div class="balloon b4"></div>
+  </div>
+
+  <!-- ── PHOTO PLACEHOLDER ── -->
+  <div class="photo-wrap">
+    <div class="photo-inner">
+      <!-- Camera icon (inline SVG) -->
+      <svg width="52" height="44" viewBox="0 0 52 44" fill="none"
+           xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="10" width="50" height="32" rx="4" ry="4"
+              stroke="rgba(255,255,255,0.75)" stroke-width="2" fill="none"/>
+        <circle cx="26" cy="26" r="9"
+                stroke="rgba(255,255,255,0.75)" stroke-width="2" fill="none"/>
+        <path d="M18 10 L21 3 H31 L34 10" stroke="rgba(255,255,255,0.75)"
+              stroke-width="2" fill="none" stroke-linejoin="round"/>
+        <circle cx="26" cy="26" r="4" fill="rgba(255,255,255,0.4)"/>
+        <circle cx="42" cy="17" r="2" fill="rgba(255,255,255,0.6)"/>
+      </svg>
+      Dein Foto
+    </div>
+  </div>
+
+  <!-- ── SIDE DECORATIONS ── -->
+  <span class="deco deco-cocktail" aria-hidden="true">🍸</span>
+  <span class="deco deco-cupcake"  aria-hidden="true">🧁</span>
+
+  <!-- ── SPARKLE STARS ── -->
+  <span class="spark sp1" aria-hidden="true">★</span>
+  <span class="spark sp2" aria-hidden="true">✦</span>
+  <span class="spark sp3" aria-hidden="true">★</span>
+  <span class="spark sp4" aria-hidden="true">✦</span>
+  <span class="spark sp5" aria-hidden="true">✸</span>
+  <span class="spark sp6" aria-hidden="true">✦</span>
+
+  <!-- ── CANDLE FLAMES ── -->
+  <div class="candles" aria-hidden="true">
+    <span class="flame">🕯️</span>
+    <span class="flame">🕯️</span>
+  </div>
+
+  <!-- ── BIG "30" ── -->
+  <div class="big-num" aria-label="30">30</div>
+
+  <!-- ── BIRTHDAY PARTY – RANSOM NOTE ── -->
+  <div class="bp-row" aria-label="Birthday Party">
+    <span class="l lB">B</span>
+    <span class="l li">i</span>
+    <span class="l lr">r</span>
+    <span class="l lt">t</span>
+    <span class="l lh">h</span>
+    <span class="l lD">D</span>
+    <span class="l lA1">A</span>
+    <span class="l ly1">y</span>
+    <span class="gap"></span>
+    <span class="l lP">P</span>
+    <span class="l lA2">A</span>
+    <span class="l lR">R</span>
+    <span class="l lT">T</span>
+    <span class="l ly2">y</span>
+  </div>
+
+  <!-- ── EVENT DETAILS ── -->
+  <div class="details">
+    <div class="det-date">
+      <span>21. Juni</span>
+      <span class="det-pipe">|</span>
+      <span>19:30 Uhr</span>
+    </div>
+    <div class="det-loc">📍 Ort der Feier, Deine Stadt.</div>
+  </div>
+
+</div>
+</body>
+</html>
