@@ -16,9 +16,11 @@
       background: #c4bcb3;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 20px;
+      justify-content: flex-start;
+      padding: 30px 20px 40px;
+      gap: 16px;
     }
 
     /* ══════════════════════════════
@@ -399,6 +401,220 @@
       letter-spacing: 1.8px;
       margin-top: 7px;
     }
+
+    /* ══════════════════════════════
+       TABS SECTION
+    ══════════════════════════════ */
+    .tabs-section {
+      width: 400px;
+      background: #f3ede4;
+      border-radius: 5px;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.10),
+        0 8px 20px rgba(0,0,0,0.14);
+      overflow: hidden;
+    }
+
+    .tabs-nav {
+      display: flex;
+      background: rgba(233,30,99,0.06);
+      border-bottom: 2px solid rgba(233,30,99,0.15);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 11px 3px 10px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      border-bottom: 2.5px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .tab-btn:hover {
+      color: #e91e8c;
+      background: rgba(233,30,99,0.04);
+    }
+
+    .tab-btn.active {
+      color: #e91e8c;
+      border-bottom-color: #e91e8c;
+      background: rgba(233,30,99,0.05);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 18px 20px 22px;
+      max-height: 440px;
+      overflow-y: auto;
+    }
+
+    .tab-content.active { display: block; }
+
+    .tab-content::-webkit-scrollbar { width: 4px; }
+    .tab-content::-webkit-scrollbar-track { background: rgba(233,30,99,0.04); }
+    .tab-content::-webkit-scrollbar-thumb { background: rgba(233,30,99,0.22); border-radius: 2px; }
+
+    /* ── Shared tab header ── */
+    .tab-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(233,30,99,0.15);
+    }
+
+    .tab-icon { font-size: 28px; line-height: 1; }
+
+    .tab-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .tab-subtitle {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #aaa;
+      letter-spacing: 0.4px;
+      margin-top: 2px;
+    }
+
+    /* ── Gäste ── */
+    .guest-group { margin-bottom: 14px; }
+
+    .group-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 9.5px;
+      font-weight: 900;
+      color: #e91e8c;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      margin-bottom: 6px;
+    }
+
+    .guest-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 10px;
+      border-radius: 6px;
+      margin-bottom: 3px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .guest-row.confirmed { background: rgba(67,160,71,0.08); color: #222; }
+    .guest-row.declined  { background: rgba(229,57,53,0.07); color: #aaa; text-decoration: line-through; }
+    .guest-row.pending   { background: rgba(255,179,0,0.10); color: #333; }
+
+    .status-dot { font-size: 13px; font-weight: 900; width: 20px; text-align: center; }
+    .status-dot.green  { color: #43a047; }
+    .status-dot.red    { color: #e53935; }
+    .status-dot.yellow { color: #ffb300; }
+
+    /* ── Getränke ── */
+    .drink-section { margin-bottom: 13px; }
+
+    .drink-cat {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      color: #e91e8c;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 5px;
+    }
+
+    .drink-item {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+      padding: 3px 0 3px 12px;
+      border-left: 2.5px solid rgba(233,30,99,0.2);
+      margin-bottom: 3px;
+    }
+
+    .drink-section.highlight .drink-item {
+      background: rgba(233,30,99,0.06);
+      border-radius: 4px;
+      padding: 5px 10px;
+      border-left: 3px solid #e91e8c;
+    }
+
+    /* ── Speisekarte ── */
+    .menu-section { margin-bottom: 13px; }
+
+    .menu-cat {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      color: #e91e8c;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 5px;
+    }
+
+    .menu-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+      padding: 4px 0;
+      border-bottom: 1px dotted rgba(0,0,0,0.1);
+    }
+
+    .menu-note {
+      font-size: 11px;
+      font-weight: 700;
+      color: #bbb;
+      font-style: italic;
+    }
+
+    .menu-section.highlight .menu-row { color: #e91e8c; }
+    .menu-section.highlight .menu-note { color: #f48fb1; }
+
+    /* ── Spiele ── */
+    .game-card {
+      background: rgba(233,30,99,0.04);
+      border-left: 3px solid #f48fb1;
+      border-radius: 0 6px 6px 0;
+      padding: 10px 13px;
+      margin-bottom: 10px;
+    }
+
+    .game-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+
+    .game-desc {
+      font-family: 'Nunito', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #777;
+      line-height: 1.55;
+    }
   </style>
 </head>
 <body>
@@ -514,5 +730,183 @@
   </div>
 
 </div>
+
+<!-- ════════════════════════════════════════
+     TABS SECTION
+════════════════════════════════════════ -->
+<div class="tabs-section">
+
+  <!-- Nav -->
+  <div class="tabs-nav" role="tablist">
+    <button class="tab-btn active" data-tab="gaeste"   role="tab" aria-selected="true">Eingeladene&nbsp;Gäste</button>
+    <button class="tab-btn"        data-tab="getraenke" role="tab">Getränkeliste</button>
+    <button class="tab-btn"        data-tab="speisen"  role="tab">Speisekarte</button>
+    <button class="tab-btn"        data-tab="spiele"   role="tab">Spiele</button>
+  </div>
+
+  <!-- ── TAB 1: Eingeladene Gäste ── -->
+  <div class="tab-content active" id="tab-gaeste" role="tabpanel">
+    <div class="tab-header">
+      <span class="tab-icon">👥</span>
+      <div>
+        <div class="tab-title">Eingeladene Gäste</div>
+        <div class="tab-subtitle">14 eingeladen · 10 zugesagt · 2 offen · 2 abgesagt</div>
+      </div>
+    </div>
+
+    <div class="guest-group">
+      <div class="group-label">Familie</div>
+      <div class="guest-row confirmed"><span>Mama &amp; Papa</span>       <span class="status-dot green">✓</span></div>
+      <div class="guest-row confirmed"><span>Schwester Lisa</span>        <span class="status-dot green">✓</span></div>
+      <div class="guest-row confirmed"><span>Oma Hildegard</span>         <span class="status-dot green">✓</span></div>
+      <div class="guest-row pending">  <span>Onkel Bernd</span>           <span class="status-dot yellow">?</span></div>
+      <div class="guest-row declined"> <span>Tante Monika</span>          <span class="status-dot red">✗</span></div>
+    </div>
+
+    <div class="guest-group">
+      <div class="group-label">Freunde &amp; Bekannte</div>
+      <div class="guest-row confirmed"><span>Sophie &amp; Max</span>      <span class="status-dot green">✓</span></div>
+      <div class="guest-row confirmed"><span>Jana</span>                  <span class="status-dot green">✓</span></div>
+      <div class="guest-row confirmed"><span>Felix &amp; Lena</span>      <span class="status-dot green">✓</span></div>
+      <div class="guest-row confirmed"><span>Mia</span>                   <span class="status-dot green">✓</span></div>
+      <div class="guest-row confirmed"><span>Sarah &amp; Jonas</span>     <span class="status-dot green">✓</span></div>
+      <div class="guest-row pending">  <span>Niklas</span>                <span class="status-dot yellow">?</span></div>
+      <div class="guest-row declined"> <span>Tom</span>                   <span class="status-dot red">✗</span></div>
+      <div class="guest-row confirmed"><span>Klara</span>                 <span class="status-dot green">✓</span></div>
+    </div>
+  </div>
+
+  <!-- ── TAB 2: Getränkeliste ── -->
+  <div class="tab-content" id="tab-getraenke" role="tabpanel">
+    <div class="tab-header">
+      <span class="tab-icon">🥂</span>
+      <div>
+        <div class="tab-title">Getränkeliste</div>
+        <div class="tab-subtitle">Für jeden Geschmack ist gesorgt!</div>
+      </div>
+    </div>
+
+    <div class="drink-section">
+      <div class="drink-cat">🥂 Begrüßungsgetränk</div>
+      <div class="drink-item">Aperol Spritz</div>
+      <div class="drink-item">Prosecco &amp; Himbeer-Sirup</div>
+    </div>
+
+    <div class="drink-section">
+      <div class="drink-cat">🍷 Alkoholisch</div>
+      <div class="drink-item">Rotwein — Chianti Classico</div>
+      <div class="drink-item">Weißwein — Pinot Grigio</div>
+      <div class="drink-item">Bier — Helles &amp; Weizen vom Fass</div>
+      <div class="drink-item">Hauscocktail: „Dirty Thirty" 🍹</div>
+    </div>
+
+    <div class="drink-section">
+      <div class="drink-cat">🧃 Alkoholfrei</div>
+      <div class="drink-item">Wasser — still &amp; sprudelnd</div>
+      <div class="drink-item">Frisch gepresster Orangensaft</div>
+      <div class="drink-item">Cola, Limo, Tonic Water</div>
+      <div class="drink-item">Hugo alkoholfrei</div>
+    </div>
+
+    <div class="drink-section highlight">
+      <div class="drink-cat">🥃 Mitternachts-Shot</div>
+      <div class="drink-item">Limoncello — auf die nächsten 30! 🎉</div>
+    </div>
+  </div>
+
+  <!-- ── TAB 3: Speisekarte ── -->
+  <div class="tab-content" id="tab-speisen" role="tabpanel">
+    <div class="tab-header">
+      <span class="tab-icon">🍕</span>
+      <div>
+        <div class="tab-title">Speisekarte</div>
+        <div class="tab-subtitle">Pizzaria Golden · Abendmenü</div>
+      </div>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-cat">🥗 Vorspeisen</div>
+      <div class="menu-row"><span>Bruschetta al Pomodoro</span><span class="menu-note">klassisch</span></div>
+      <div class="menu-row"><span>Antipasto Misto</span>       <span class="menu-note">gemischte Platte</span></div>
+      <div class="menu-row"><span>Rucola-Parmesan-Salat</span><span class="menu-note">mit Pinienkernen</span></div>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-cat">🍕 Pizza aus dem Holzofen</div>
+      <div class="menu-row"><span>Margherita</span>            <span class="menu-note">klassisch</span></div>
+      <div class="menu-row"><span>Diavola</span>               <span class="menu-note">pikante Salami</span></div>
+      <div class="menu-row"><span>Quattro Formaggi</span>      <span class="menu-note">4 Käsesorten</span></div>
+      <div class="menu-row"><span>Prosciutto e Rucola</span>   <span class="menu-note">Parma &amp; Rucola</span></div>
+      <div class="menu-row"><span>Vegetariana</span>           <span class="menu-note">saisonal</span></div>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-cat">🍝 Pasta</div>
+      <div class="menu-row"><span>Spaghetti Carbonara</span>          <span class="menu-note">original</span></div>
+      <div class="menu-row"><span>Rigatoni all'Arrabbiata</span>      <span class="menu-note">scharf</span></div>
+      <div class="menu-row"><span>Gnocchi al Pesto</span>             <span class="menu-note">hausgemacht</span></div>
+    </div>
+
+    <div class="menu-section highlight">
+      <div class="menu-cat">🎂 Dessert</div>
+      <div class="menu-row"><span>Geburtstagstorte</span>             <span class="menu-note">3-stöckig ✨</span></div>
+      <div class="menu-row"><span>Tiramisù</span>                     <span class="menu-note">hausgemacht</span></div>
+      <div class="menu-row"><span>Panna Cotta ai Frutti di Bosco</span><span class="menu-note">Waldbeeren</span></div>
+    </div>
+  </div>
+
+  <!-- ── TAB 4: Spiele ── -->
+  <div class="tab-content" id="tab-spiele" role="tabpanel">
+    <div class="tab-header">
+      <span class="tab-icon">🎮</span>
+      <div>
+        <div class="tab-title">Spiele &amp; Programm</div>
+        <div class="tab-subtitle">Für unvergessliche Momente!</div>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-title">🎭 Wer bin ich?</div>
+      <div class="game-desc">Jeder bekommt einen berühmten Namen auf die Stirn geklebt und muss durch Ja/Nein-Fragen herausfinden, wer er ist. Der Schnellste gewinnt!</div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-title">🃏 Nie hab ich jemals …</div>
+      <div class="game-desc">Klassiker für alte Freunde! Wer die Aussage kennt, nippt am Glas — perfekt, um alte Geheimnisse ans Licht zu bringen.</div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-title">🎯 30 Fragen über mich</div>
+      <div class="game-desc">Wer kennt das Geburtstagskind am besten? Lieblingslied, peinlichster Moment, Kindheitstraum — Punkte für richtige Antworten!</div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-title">🕺 Tanzfloor-Battle</div>
+      <div class="game-desc">Diskokugel an, Playlist auf volle Lautstärke! Zwei Duos tanzen gegeneinander, das Publikum krönt den Gewinner.</div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-title">🎁 Wünsche für die 30er</div>
+      <div class="game-desc">Jeder schreibt einen Wunsch oder Tipp für das nächste Jahrzehnt auf eine Karte. Am Ende werden alle laut vorgelesen — Lachen garantiert!</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
 </body>
 </html>
