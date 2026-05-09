@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt — LAEMU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .contact-hero {
+      padding-top:calc(var(--nav-h) + 5rem);
+      padding-bottom:5rem;
+      background:var(--bg-dark); color:var(--text-inv);
+      position:relative; overflow:hidden;
+    }
+    .contact-hero::before {
+      content:''; position:absolute; inset:0;
+      background:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1920&q=80') center/cover;
+      opacity:.12;
+    }
+    .person-contact-card {
+      background:var(--bg-card); border-radius:var(--r-xl);
+      overflow:hidden;
+      transition:transform var(--t), box-shadow var(--t);
+    }
+    .person-contact-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+    .person-contact-card__img {
+      width:100%; aspect-ratio:4/3; object-fit:cover;
+      display:flex; align-items:center; justify-content:center;
+      font-size:6rem; font-weight:800;
+    }
+    .person-contact-card__body { padding:2rem; }
+    .contact-topic {
+      display:flex; align-items:center; gap:.625rem;
+      padding:.5rem 0; border-bottom:1px solid var(--border);
+      font-size:.875rem; color:var(--text-muted);
+    }
+    .contact-topic:last-child { border-bottom:none; }
+    .contact-topic::before { content:'→'; color:var(--accent); flex-shrink:0; }
+
+    .social-channel {
+      display:flex; align-items:center; gap:1.25rem;
+      padding:1.25rem;
+      background:var(--bg-card); border-radius:var(--r-lg);
+      cursor:pointer; transition:background var(--t);
+      text-decoration:none; color:inherit;
+    }
+    .social-channel:hover { background:var(--bg-warm); }
+    .social-channel__icon {
+      width:3rem; height:3rem; border-radius:var(--r-md);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.375rem; flex-shrink:0;
+    }
+    .social-channel__handle { font-size:.8125rem; color:var(--text-muted); }
+  </style>
+</head>
+<body>
+
+<nav class="nav dark" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">LA<span>E</span>MU</a>
+    <ul class="nav__links">
+      <li><a href="mission.html" class="nav__link">Mission</a></li>
+      <li><a href="community.html" class="nav__link">Community</a></li>
+      <li><a href="academy.html" class="nav__link">Academy</a></li>
+      <li><a href="events.html" class="nav__link">Events</a></li>
+      <li><a href="formations.html" class="nav__link">Formationen</a></li>
+      <li><a href="shop.html" class="nav__link">Shop</a></li>
+      <li><a href="contact.html" class="nav__link active">Kontakt</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a href="member-community.html" class="nav__cta">Mitglied werden</a>
+      <button class="nav__hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="mission.html" class="nav__mobile-link">Mission</a>
+  <a href="community.html" class="nav__mobile-link">Community</a>
+  <a href="academy.html" class="nav__mobile-link">Academy</a>
+  <a href="events.html" class="nav__mobile-link">Events</a>
+  <a href="formations.html" class="nav__mobile-link">Formationen</a>
+  <a href="shop.html" class="nav__mobile-link">Shop</a>
+  <a href="contact.html" class="nav__mobile-link">Kontakt</a>
+  <a href="member-community.html" class="btn btn-primary btn-lg mt-4">Mitglied werden</a>
+</div>
+
+<!-- HERO -->
+<section class="contact-hero">
+  <div class="container" style="position:relative; z-index:2;">
+    <div class="section-label" style="color:var(--accent-l); margin-bottom:1.5rem;">Kontakt</div>
+    <h1 class="display-xl fade-up" style="max-width:720px; margin-bottom:1.25rem;">Wir freuen uns<br>von dir zu hören.</h1>
+    <p class="body-lg fade-up" style="color:rgba(255,255,255,.6); max-width:520px; transition-delay:.1s;">
+      Ideen, Fragen, Kooperationen, Formationsanmeldungen, Fachpartner-Anfragen — alles willkommen. Wir antworten innerhalb von 48 Stunden.
+    </p>
+  </div>
+</section>
+
+<!-- DIRECT CONTACTS -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Direkte Ansprechpersonen</div>
+      <h2 class="display-md fade-up">Die richtigen Personen für dein Anliegen.</h2>
+    </div>
+    <div class="grid-2 stagger" style="max-width:900px; margin:0 auto; gap:2.5rem;">
+
+      <!-- Niklaus -->
+      <div class="person-contact-card fade-up">
+        <div class="person-contact-card__img" style="background:linear-gradient(135deg,#EEE8DF,#D4C5B0);">🎻</div>
+        <div class="person-contact-card__body">
+          <div style="font-size:1.5rem; font-weight:800; letter-spacing:-.025em; margin-bottom:.25rem;">Niklaus Hess</div>
+          <div style="color:var(--accent); font-weight:600; font-size:.9375rem; margin-bottom:1.5rem;">Musik, Community & Academy</div>
+          <div style="margin-bottom:1.75rem;">
+            <div class="contact-topic">Volksmusik & Kulturthemen</div>
+            <div class="contact-topic">Academy & Lehreranfragen</div>
+            <div class="contact-topic">Instrumente & Technik</div>
+            <div class="contact-topic">Community-Inhalte</div>
+            <div class="contact-topic">Formations-Aufnahmen</div>
+            <div class="contact-topic">Fachpartner-Aufnahmen</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:.625rem;">
+            <a href="mailto:niklaus@laemu.ch" class="btn btn-primary" style="justify-content:center;">📧 niklaus@laemu.ch</a>
+            <a href="tel:+41791234567" class="btn btn-outline" style="justify-content:center;">📞 +41 79 123 45 67</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selina -->
+      <div class="person-contact-card fade-up" style="transition-delay:.15s;">
+        <div class="person-contact-card__img" style="background:linear-gradient(135deg,#2C2A27,#4A4440);">✦</div>
+        <div class="person-contact-card__body">
+          <div style="font-size:1.5rem; font-weight:800; letter-spacing:-.025em; margin-bottom:.25rem;">Selina Strickler</div>
+          <div style="color:var(--accent); font-weight:600; font-size:.9375rem; margin-bottom:1.5rem;">Branding, Marketing & Kooperationen</div>
+          <div style="margin-bottom:1.75rem;">
+            <div class="contact-topic">Branding & Design-Anfragen</div>
+            <div class="contact-topic">Partnerschaften & Kooperationen</div>
+            <div class="contact-topic">Marketing & PR</div>
+            <div class="contact-topic">Events & Veranstaltungen</div>
+            <div class="contact-topic">Ideen & Kreativprojekte</div>
+            <div class="contact-topic">Medienanfragen</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:.625rem;">
+            <a href="mailto:selina@laemu.ch" class="btn btn-primary" style="justify-content:center;">📧 selina@laemu.ch</a>
+            <a href="tel:+41791234568" class="btn btn-outline" style="justify-content:center;">📞 +41 79 123 45 68</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GENERAL CONTACT FORM -->
+<section class="section bg-warm">
+  <div class="container">
+    <div class="grid-2" style="gap:4rem; align-items:start;">
+      <div class="fade-up">
+        <div class="section-label">Kontaktformular</div>
+        <h2 class="display-md" style="margin-bottom:1rem;">Schreib uns direkt.</h2>
+        <p class="body-lg text-muted" style="margin-bottom:2rem;">Egal was dein Anliegen ist — wir nehmen uns Zeit für dich. Du kannst uns auch Ideen, Feedback oder Verbesserungsvorschläge schicken.</p>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div style="display:flex; align-items:flex-start; gap:1rem;">
+            <span style="font-size:1.5rem; flex-shrink:0; margin-top:.25rem;">⏱️</span>
+            <div>
+              <div style="font-weight:700; margin-bottom:.25rem;">Antwortzeit: 24–48h</div>
+              <div class="body-sm">Wir antworten immer — werktags innerhalb von 24 Stunden.</div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:1rem;">
+            <span style="font-size:1.5rem; flex-shrink:0; margin-top:.25rem;">🤝</span>
+            <div>
+              <div style="font-weight:700; margin-bottom:.25rem;">Persönlich & direkt</div>
+              <div class="body-sm">Kein Bot, keine automatischen Antworten. Echte Menschen, echte Gespräche.</div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:1rem;">
+            <span style="font-size:1.5rem; flex-shrink:0; margin-top:.25rem;">💡</span>
+            <div>
+              <div style="font-weight:700; margin-bottom:.25rem;">Ideen erwünscht</div>
+              <div class="body-sm">LAEMU ist ein Gemeinschaftsprojekt. Wir freuen uns über Feedback und neue Impulse.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s;">
+        <form data-demo style="background:var(--bg); border-radius:var(--r-xl); padding:2.5rem; box-shadow:var(--shadow-sm);">
+          <div class="grid-2" style="gap:1rem; margin-bottom:0;">
+            <div class="form-group">
+              <label class="form-label">Vorname</label>
+              <input type="text" class="form-input" placeholder="Lena">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nachname</label>
+              <input type="text" class="form-input" placeholder="Müller">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">E-Mail</label>
+            <input type="email" class="form-input" placeholder="lena.mueller@beispiel.ch">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Betreff</label>
+            <select class="form-select">
+              <option value="">Wähle einen Betreff</option>
+              <option>Allgemeine Anfrage</option>
+              <option>Formation anmelden</option>
+              <option>Fachpartner werden</option>
+              <option>Academy & Kurse</option>
+              <option>Community</option>
+              <option>Kooperation & Partnerschaft</option>
+              <option>Event einreichen</option>
+              <option>Idee einbringen</option>
+              <option>Medienanfrage</option>
+              <option>Anderes</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nachricht</label>
+            <textarea class="form-textarea" placeholder="Dein Anliegen — je mehr Details, desto besser können wir helfen."></textarea>
+          </div>
+          <div style="display:flex; align-items:center; gap:.625rem; margin-bottom:1.25rem;">
+            <input type="checkbox" id="dsgvo" style="width:1rem; height:1rem; flex-shrink:0;">
+            <label for="dsgvo" class="body-sm">Ich stimme der <a href="#" style="color:var(--accent);">Datenschutzerklärung</a> zu.</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg w-full" style="justify-content:center;">Nachricht senden →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL MEDIA -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Social Media</div>
+      <h2 class="display-md fade-up">Verpasse keine News von LAEMU.</h2>
+      <p class="body-lg text-muted fade-up" style="max-width:460px; margin:.75rem auto 0; transition-delay:.1s;">
+        Folge uns und bleib immer auf dem Laufenden — neue Events, Formationen, Academy-Inhalte und Community-Highlights.
+      </p>
+    </div>
+    <div class="grid-2 stagger" style="max-width:760px; margin:0 auto; gap:1rem;">
+      <a href="#" class="social-channel fade-up" style="text-decoration:none;">
+        <div class="social-channel__icon" style="background:linear-gradient(135deg,#E1306C,#833AB4);">📷</div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.125rem;">Instagram</div>
+          <div class="social-channel__handle">@laemu.swiss</div>
+        </div>
+        <div style="margin-left:auto; font-size:.875rem; color:var(--text-muted);">→</div>
+      </a>
+      <a href="#" class="social-channel fade-up" style="text-decoration:none; transition-delay:.1s;">
+        <div class="social-channel__icon" style="background:#1877F2;">📘</div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.125rem;">Facebook</div>
+          <div class="social-channel__handle">LAEMU — Ländlermusik Schweiz</div>
+        </div>
+        <div style="margin-left:auto; font-size:.875rem; color:var(--text-muted);">→</div>
+      </a>
+      <a href="#" class="social-channel fade-up" style="text-decoration:none; transition-delay:.15s;">
+        <div class="social-channel__icon" style="background:#FF0000;">▶️</div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.125rem;">YouTube</div>
+          <div class="social-channel__handle">LAEMU Schweiz</div>
+        </div>
+        <div style="margin-left:auto; font-size:.875rem; color:var(--text-muted);">→</div>
+      </a>
+      <a href="#" class="social-channel fade-up" style="text-decoration:none; transition-delay:.2s;">
+        <div class="social-channel__icon" style="background:#1DB954;">🎵</div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.125rem;">Spotify</div>
+          <div class="social-channel__handle">LAEMU Ländlermusik Playlists</div>
+        </div>
+        <div style="margin-left:auto; font-size:.875rem; color:var(--text-muted);">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section style="background:var(--bg-dark); padding:clamp(5rem,10vw,10rem) 0; text-align:center;">
+  <div class="container container-sm">
+    <div class="script fade-in" style="color:var(--accent-l); font-size:2rem; margin-bottom:1rem;">Immer dabei</div>
+    <h2 class="display-md text-inv fade-up" style="margin-bottom:1rem;">LAEMU Newsletter.</h2>
+    <p class="body-lg fade-up" style="color:rgba(255,255,255,.5); max-width:440px; margin:0 auto 2.5rem; transition-delay:.1s;">
+      Neue Events, Formationen, Academy-Kurse und Szenen-News — direkt in dein Postfach. Kein Spam. Jederzeit abmeldbar.
+    </p>
+    <form data-demo style="display:flex; gap:1rem; max-width:460px; margin:0 auto; flex-wrap:wrap;" class="fade-up" style="transition-delay:.2s;">
+      <input type="email" placeholder="Deine E-Mail-Adresse" class="form-input" style="flex:1; min-width:220px; background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.15); color:#fff;">
+      <button type="submit" class="btn btn-accent">Anmelden</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div><div class="footer__logo">LA<span>E</span>MU</div><div class="footer__tagline">Am Puls der Ländlermusik.</div><div class="social-links" style="margin-top:1.75rem;"><a href="#" class="social-link">📷</a><a href="#" class="social-link">📘</a><a href="#" class="social-link">▶️</a><a href="#" class="social-link">🎵</a></div></div>
+      <div><div class="footer__heading">Plattform</div><ul class="footer__links"><li><a href="community.html" class="footer__link">Community</a></li><li><a href="academy.html" class="footer__link">Academy</a></li><li><a href="events.html" class="footer__link">Events</a></li><li><a href="formations.html" class="footer__link">Formationen</a></li><li><a href="shop.html" class="footer__link">Shop</a></li></ul></div>
+      <div><div class="footer__heading">LAEMU</div><ul class="footer__links"><li><a href="mission.html" class="footer__link">Mission</a></li><li><a href="contact.html" class="footer__link">Kontakt</a></li></ul></div>
+      <div><div class="footer__heading">Rechtliches</div><ul class="footer__links"><li><a href="#" class="footer__link">Datenschutz</a></li><li><a href="#" class="footer__link">AGB</a></li><li><a href="#" class="footer__link">Impressum</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>© 2025 LAEMU.</span><span>Made with ❤️ für die Schweizer Volksmusik</span></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

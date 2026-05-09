@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academy — Mitgliederbereich — LAEMU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    body { background: var(--bg-warm); }
+    .member-nav {
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      height:var(--nav-h);
+      background:rgba(247,242,236,.95);
+      backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center;
+    }
+
+    .course-card {
+      background:var(--bg); border-radius:var(--r-xl); overflow:hidden;
+      cursor:pointer; transition:box-shadow var(--t);
+    }
+    .course-card:hover { box-shadow:var(--shadow-md); }
+    .course-card__thumb {
+      width:100%; aspect-ratio:16/9;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    .course-card__play {
+      width:4rem; height:4rem; border-radius:50%;
+      background:rgba(255,255,255,.15);
+      backdrop-filter:blur(8px);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.5rem; color:#fff;
+      border:2px solid rgba(255,255,255,.3);
+      transition:background var(--t), transform var(--t);
+      z-index:2;
+    }
+    .course-card:hover .course-card__play { background:rgba(255,255,255,.25); transform:scale(1.1); }
+    .course-card__body { padding:1.25rem; }
+    .course-card__progress { margin-top:1rem; }
+
+    .video-player {
+      background:var(--bg-dark);
+      border-radius:var(--r-xl);
+      overflow:hidden;
+      aspect-ratio:16/9;
+      position:relative;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer;
+    }
+    .video-player__overlay {
+      position:absolute; inset:0;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:1rem;
+      color:#fff;
+    }
+    .video-play-btn {
+      width:5rem; height:5rem; border-radius:50%;
+      background:rgba(255,255,255,.15);
+      backdrop-filter:blur(8px);
+      border:2px solid rgba(255,255,255,.3);
+      display:flex; align-items:center; justify-content:center;
+      font-size:2rem;
+      transition:background var(--t), transform var(--t);
+      cursor:pointer;
+    }
+    .video-player:hover .video-play-btn { background:var(--accent); transform:scale(1.1); }
+
+    .lesson-row {
+      display:flex; align-items:center; gap:1rem;
+      padding:.875rem 1rem;
+      border-radius:var(--r-md);
+      cursor:pointer;
+      transition:background var(--t);
+    }
+    .lesson-row:hover { background:var(--bg-warm); }
+    .lesson-row.active { background:var(--bg-warm); }
+    .lesson-row.completed .lesson-num { background:var(--accent); color:#fff; }
+    .lesson-num {
+      width:2rem; height:2rem; border-radius:50%;
+      background:var(--bg-warm); display:flex; align-items:center; justify-content:center;
+      font-size:.6875rem; font-weight:700; flex-shrink:0;
+      transition:background var(--t);
+    }
+    .lesson-row.active .lesson-num { background:var(--text); color:var(--bg); }
+    .lesson-duration { font-size:.75rem; color:var(--text-muted); margin-left:auto; flex-shrink:0; }
+
+    .note-card {
+      background:var(--bg-warm);
+      border-radius:var(--r-lg);
+      padding:1.25rem;
+      border-left:3px solid var(--accent);
+      font-size:.875rem; line-height:1.6; color:var(--text-muted);
+    }
+    .pdf-item {
+      display:flex; align-items:center; gap:.875rem;
+      padding:.875rem 1.25rem;
+      background:var(--bg); border-radius:var(--r-md);
+      cursor:pointer; transition:background var(--t);
+      text-decoration:none; color:inherit;
+    }
+    .pdf-item:hover { background:var(--bg-warm); }
+    .pdf-icon {
+      width:2.5rem; height:2.5rem; border-radius:var(--r-sm);
+      background:rgba(220,38,38,.1); color:rgba(220,38,38,.8);
+      display:flex; align-items:center; justify-content:center;
+      font-size:.75rem; font-weight:800; flex-shrink:0;
+    }
+    .comment-item {
+      display:flex; gap:.875rem; padding:.875rem 0;
+      border-bottom:1px solid var(--border);
+    }
+    .comment-item:last-child { border-bottom:none; }
+    .comment-avatar {
+      width:2.25rem; height:2.25rem; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:.75rem; flex-shrink:0;
+    }
+
+    .widget { background:var(--bg); border-radius:var(--r-xl); padding:1.5rem; margin-bottom:1.25rem; }
+    .widget__title { font-size:.6875rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:1.125rem; }
+  </style>
+</head>
+<body>
+
+<!-- MEMBER NAV -->
+<nav class="member-nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">LA<span>E</span>MU</a>
+    <div style="display:flex; align-items:center; gap:1.5rem; margin-left:2rem;">
+      <span style="font-size:.6875rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); background:var(--bg-warm); padding:.25rem .75rem; border-radius:var(--r-f);">Academy</span>
+    </div>
+    <div style="flex:1; max-width:360px; margin:0 2rem;">
+      <input type="search" placeholder="Kurse und Lektionen suchen…" class="form-input" style="padding:.5rem 1rem; font-size:.875rem;">
+    </div>
+    <div style="display:flex; align-items:center; gap:1.25rem; margin-left:auto;">
+      <a href="member-community.html" style="font-size:.8125rem; font-weight:600; color:var(--text-muted);">Community</a>
+      <button style="background:none; border:none; cursor:pointer; font-size:1.25rem;" title="Benachrichtigungen">🔔</button>
+      <div style="width:2.25rem; height:2.25rem; border-radius:50%; background:linear-gradient(135deg,var(--accent-warm),var(--accent-l)); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.75rem; color:var(--accent-deep); cursor:pointer;">DU</div>
+      <button class="nav__hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MEMBER LAYOUT -->
+<div class="member-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div style="margin-bottom:1.5rem;">
+      <div class="widget__title">Meine Kurse</div>
+    </div>
+    <nav class="sidebar__nav">
+      <a href="#" class="sidebar__link active">
+        <span>🪗</span> Handorgel Starterkurs
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>🎵</span> Örgeli Schnupperkurs
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>🎹</span> Klavier Begleitung
+      </a>
+    </nav>
+    <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+      <div class="widget__title">Navigation</div>
+    </div>
+    <nav class="sidebar__nav">
+      <a href="#" class="sidebar__link">
+        <span>🏠</span> Dashboard
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>📚</span> Alle Kurse
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>🔖</span> Gespeichert
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>🏆</span> Meine Badges
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>📅</span> Live Calls
+      </a>
+      <a href="member-community.html" class="sidebar__link">
+        <span>👥</span> Community
+      </a>
+    </nav>
+    <div style="margin-top:auto; padding-top:1.5rem; border-top:1px solid var(--border);">
+      <div style="background:linear-gradient(135deg,var(--accent),var(--accent-deep)); border-radius:var(--r-lg); padding:1rem; color:#fff; text-align:center;">
+        <div style="font-size:1.5rem; margin-bottom:.25rem;">🔥</div>
+        <div style="font-size:1.75rem; font-weight:900; letter-spacing:-.04em; line-height:1;">7</div>
+        <div style="font-size:.6875rem; opacity:.8;">Tage Streak</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="member-content">
+
+    <!-- Breadcrumb -->
+    <div style="display:flex; align-items:center; gap:.5rem; font-size:.8125rem; color:var(--text-muted); margin-bottom:1.5rem; flex-wrap:wrap;">
+      <a href="#" style="color:var(--text-muted);">Academy</a>
+      <span>›</span>
+      <a href="#" style="color:var(--text-muted);">Handorgel Starterkurs</a>
+      <span>›</span>
+      <span style="color:var(--text);">Lektion 5: Der Ländler-Rhythmus</span>
+    </div>
+
+    <!-- VIDEO PLAYER -->
+    <div class="video-player" style="margin-bottom:2rem;" onclick="this.querySelector('.video-player__overlay').style.opacity='0'; showToast('Video wird abgespielt…');">
+      <div style="position:absolute; inset:0; background:linear-gradient(135deg,#1A1814 0%,#3A3530 60%,#5A4530 100%);"></div>
+      <div class="video-player__overlay">
+        <div style="font-size:.6875rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; opacity:.5; margin-bottom:-.5rem;">Lektion 5 von 24</div>
+        <div class="video-play-btn">▶</div>
+        <div style="font-size:1.375rem; font-weight:800; text-align:center;">Der Ländler-Rhythmus</div>
+        <div style="opacity:.5; font-size:.875rem;">18:34 · Andreas Kälin</div>
+      </div>
+      <!-- fake progress bar at bottom -->
+      <div style="position:absolute; bottom:0; left:0; right:0; height:4px; background:rgba(255,255,255,.15);">
+        <div style="width:35%; height:100%; background:var(--accent);"></div>
+      </div>
+    </div>
+
+    <!-- LESSON INFO -->
+    <div style="margin-bottom:2rem;">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+        <div>
+          <h1 style="font-size:1.5rem; font-weight:800; letter-spacing:-.025em; margin-bottom:.25rem;">Lektion 5: Der Ländler-Rhythmus</h1>
+          <div style="font-size:.875rem; color:var(--text-muted);">Handorgel Starterkurs · mit Andreas Kälin · 18:34 min</div>
+        </div>
+        <div style="display:flex; gap:.75rem; flex-wrap:wrap;">
+          <button class="btn btn-outline btn-sm" onclick="showToast('Als abgeschlossen markiert ✓')">✓ Abgeschlossen</button>
+          <button class="btn btn-outline btn-sm" onclick="showToast('Gespeichert 🔖')">🔖 Speichern</button>
+          <button class="btn btn-outline btn-sm" onclick="showToast('Link kopiert!')">↗️ Teilen</button>
+        </div>
+      </div>
+      <p style="font-size:.9375rem; line-height:1.7; color:var(--text-muted); max-width:780px;">
+        In dieser Lektion lernst du den charakteristischen Rhythmus des Ländlers kennen — das Fundament fast aller Stücke im Genre. Andreas zeigt dir Schritt für Schritt, wie du das Timing in der linken Hand entwickelst und dabei die Melodie in der rechten sauber hältst.
+      </p>
+    </div>
+
+    <!-- TEACHER INFO -->
+    <div style="display:flex; align-items:center; gap:1.25rem; background:var(--bg); border-radius:var(--r-xl); padding:1.5rem; margin-bottom:2rem;">
+      <div style="width:4rem; height:4rem; border-radius:50%; background:linear-gradient(135deg,var(--accent-warm),var(--accent-l)); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.25rem; color:var(--accent-deep); flex-shrink:0;">AK</div>
+      <div style="flex:1;">
+        <div style="font-weight:800; font-size:1.0625rem; margin-bottom:.25rem;">Andreas Kälin</div>
+        <div style="font-size:.8125rem; color:var(--accent); font-weight:600; margin-bottom:.5rem;">Handorgel-Lehrer · LAEMU Academy</div>
+        <p style="font-size:.875rem; color:var(--text-muted);">20 Jahre Bühnenerfahrung, Konzertdiplom HKB. Andreas unterrichtet seit 12 Jahren und ist bekannt für seinen klaren, praxisnahen Unterrichtsstil.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:.5rem;">
+        <a href="member-community.html" class="btn btn-outline btn-sm">Profil</a>
+        <button class="btn btn-outline btn-sm" onclick="showToast('Nachricht gesendet ✓')">Schreiben</button>
+      </div>
+    </div>
+
+    <!-- NOTES & TIPS -->
+    <div style="margin-bottom:2rem;">
+      <h3 style="font-size:1.0625rem; font-weight:700; margin-bottom:1rem;">💡 Tipps & Hinweise</h3>
+      <div style="display:flex; flex-direction:column; gap:.75rem;">
+        <div class="note-card">Übe den Ländler-Rhythmus zuerst ohne Melodie — nur die linke Hand, bis er sicher sitzt. Erst dann die rechte Hand dazunehmen.</div>
+        <div class="note-card">Metronom-Empfehlung: Beginne mit ♩= 80 BPM und steigere dich langsam bis ♩= 120 BPM.</div>
+        <div class="note-card">Die typische «Zwickerei» in der linken Hand ist am Anfang ungewohnt — das kommt mit der Zeit. Geduld!</div>
+      </div>
+    </div>
+
+    <!-- PDFs / DOWNLOADS -->
+    <div style="margin-bottom:2rem;">
+      <h3 style="font-size:1.0625rem; font-weight:700; margin-bottom:1rem;">📄 Materialien & Downloads</h3>
+      <div style="display:flex; flex-direction:column; gap:.625rem;">
+        <a href="#" class="pdf-item" onclick="event.preventDefault(); showToast('Download startet…')">
+          <div class="pdf-icon">PDF</div>
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:.9375rem;">Notenblatt Lektion 5</div>
+            <div style="font-size:.75rem; color:var(--text-muted);">Ländler-Rhythmus Übungsblatt · PDF · 2 Seiten</div>
+          </div>
+          <span style="color:var(--accent); font-size:.875rem; font-weight:700;">↓ Download</span>
+        </a>
+        <a href="#" class="pdf-item" onclick="event.preventDefault(); showToast('Download startet…')">
+          <div class="pdf-icon">PDF</div>
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:.9375rem;">Lektionszusammenfassung</div>
+            <div style="font-size:.75rem; color:var(--text-muted);">Zusammenfassung als Merkblatt · PDF · 1 Seite</div>
+          </div>
+          <span style="color:var(--accent); font-size:.875rem; font-weight:700;">↓ Download</span>
+        </a>
+        <a href="#" class="pdf-item" onclick="event.preventDefault(); showToast('Download startet…')">
+          <div class="pdf-icon">MP3</div>
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:.9375rem;">Playback-Spur Ländler (♩=100)</div>
+            <div style="font-size:.75rem; color:var(--text-muted);">Übe mit der Begleitband · MP3 · 3:24</div>
+          </div>
+          <span style="color:var(--accent); font-size:.875rem; font-weight:700;">↓ Download</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- COMMENTS -->
+    <div style="margin-bottom:2rem; background:var(--bg); border-radius:var(--r-xl); padding:1.75rem;">
+      <h3 style="font-size:1.0625rem; font-weight:700; margin-bottom:1.5rem;">💬 Kommentare (14)</h3>
+      <div style="margin-bottom:1.5rem; display:flex; gap:.875rem; align-items:flex-start;">
+        <div class="comment-avatar" style="background:linear-gradient(135deg,var(--accent-warm),var(--accent-l)); color:var(--accent-deep);">DU</div>
+        <div style="flex:1;">
+          <textarea class="form-textarea" placeholder="Frage, Rückmeldung oder Erfahrung teilen…" style="min-height:80px;"></textarea>
+          <button class="btn btn-primary btn-sm" style="margin-top:.625rem;" onclick="showToast('Kommentar veröffentlicht ✓')">Kommentieren</button>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="comment-avatar" style="background:linear-gradient(135deg,#C4A882,#8B6F47); color:rgba(255,255,255,.7);">MH</div>
+        <div>
+          <div style="font-weight:700; font-size:.875rem;">Maria Häfliger <span style="font-weight:400; color:var(--text-muted); font-size:.75rem;">· vor 2 Tagen</span></div>
+          <p style="font-size:.875rem; color:var(--text-muted); margin-top:.25rem; line-height:1.5;">Endlich versteht man den Rhythmus! Ich habe mir die Stelle bei Minute 8:40 dreimal angeschaut. Danke Andreas! 🙏</p>
+          <button style="font-size:.75rem; font-weight:600; color:var(--text-muted); background:none; border:none; cursor:pointer; margin-top:.375rem; padding:0;">❤️ 12 · Antworten</button>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="comment-avatar" style="background:linear-gradient(135deg,var(--accent-warm),var(--accent-l)); color:var(--accent-deep);">AK</div>
+        <div>
+          <div style="display:flex; align-items:center; gap:.5rem; margin-bottom:.25rem;">
+            <span style="font-weight:700; font-size:.875rem;">Andreas Kälin</span>
+            <span style="font-size:.625rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; background:var(--accent); color:#fff; padding:.15rem .5rem; border-radius:var(--r-f);">Lehrer</span>
+            <span style="font-weight:400; color:var(--text-muted); font-size:.75rem;">· vor 1 Tag</span>
+          </div>
+          <p style="font-size:.875rem; color:var(--text-muted); line-height:1.5;">Schön, dass es geholfen hat! Diese Stelle ist wirklich der Schlüssel. Wenn du magst, teile gern eine Aufnahme in der Community 😊</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="comment-avatar" style="background:linear-gradient(135deg,#2C2A27,#4A4440); color:rgba(255,255,255,.5);">RF</div>
+        <div>
+          <div style="font-weight:700; font-size:.875rem;">Rolf Frei <span style="font-weight:400; color:var(--text-muted); font-size:.75rem;">· vor 4 Tagen</span></div>
+          <p style="font-size:.875rem; color:var(--text-muted); margin-top:.25rem; line-height:1.5;">Das Playback-MP3 ist ein Gamechanger. Viel besser mit Band üben als mit Metronom allein!</p>
+          <button style="font-size:.75rem; font-weight:600; color:var(--text-muted); background:none; border:none; cursor:pointer; margin-top:.375rem; padding:0;">❤️ 8 · Antworten</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECOMMENDED -->
+    <div style="margin-bottom:2rem;">
+      <h3 style="font-size:1.0625rem; font-weight:700; margin-bottom:1rem;">▶ Empfohlene Lektionen</h3>
+      <div class="grid-3" style="gap:1rem;">
+        <div class="course-card">
+          <div class="course-card__thumb" style="background:linear-gradient(135deg,#8B6F47,#5A4530);">
+            <div class="course-card__play">▶</div>
+            <div style="position:absolute; bottom:.5rem; right:.75rem; font-size:.6875rem; color:rgba(255,255,255,.7); background:rgba(0,0,0,.4); padding:.125rem .5rem; border-radius:4px;">16:20</div>
+          </div>
+          <div class="course-card__body">
+            <div style="font-size:.6875rem; color:var(--text-muted); margin-bottom:.25rem;">Lektion 6</div>
+            <div style="font-weight:700; font-size:.9375rem;">Melodieführung rechte Hand</div>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-card__thumb" style="background:linear-gradient(135deg,#2C2A27,#4A4440);">
+            <div class="course-card__play">▶</div>
+            <div style="position:absolute; bottom:.5rem; right:.75rem; font-size:.6875rem; color:rgba(255,255,255,.7); background:rgba(0,0,0,.4); padding:.125rem .5rem; border-radius:4px;">22:05</div>
+          </div>
+          <div class="course-card__body">
+            <div style="font-size:.6875rem; color:var(--text-muted); margin-bottom:.25rem;">Lektion 7</div>
+            <div style="font-weight:700; font-size:.9375rem;">Erstes vollständiges Stück</div>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-card__thumb" style="background:linear-gradient(135deg,#C4A882,#8B6F47);">
+            <div class="course-card__play">▶</div>
+            <div style="position:absolute; bottom:.5rem; right:.75rem; font-size:.6875rem; color:rgba(255,255,255,.7); background:rgba(0,0,0,.4); padding:.125rem .5rem; border-radius:4px;">14:45</div>
+          </div>
+          <div class="course-card__body">
+            <div style="font-size:.6875rem; color:var(--text-muted); margin-bottom:.25rem;">Bonus</div>
+            <div style="font-weight:700; font-size:.9375rem;">Häufige Anfängerfehler</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- RIGHT SIDEBAR — Course Outline -->
+  <aside class="sidebar" style="border-left:1px solid var(--border); border-right:none; left:auto; right:0; position:sticky; top:var(--nav-h); width:300px;">
+    <div class="widget__title">Kurs-Inhalt</div>
+    <div style="font-size:.8125rem; color:var(--text-muted); margin-bottom:1rem;">Handorgel Starterkurs · 24 Lektionen</div>
+
+    <!-- Progress -->
+    <div style="margin-bottom:1.5rem;">
+      <div style="display:flex; justify-content:space-between; font-size:.75rem; font-weight:600; margin-bottom:.5rem;">
+        <span>Fortschritt</span><span style="color:var(--accent);">5/24</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" data-width="21%" style="width:21%;"></div></div>
+    </div>
+
+    <!-- Lesson List -->
+    <div style="display:flex; flex-direction:column; gap:.125rem; max-height:480px; overflow-y:auto; padding-right:.25rem; scrollbar-width:thin;">
+      <div class="lesson-row completed"><div class="lesson-num">✓</div><div style="flex:1; font-size:.875rem; font-weight:600;">Einführung & Instrument</div><span class="lesson-duration">12:10</span></div>
+      <div class="lesson-row completed"><div class="lesson-num">✓</div><div style="flex:1; font-size:.875rem; font-weight:600;">Haltung & Ergonomie</div><span class="lesson-duration">15:30</span></div>
+      <div class="lesson-row completed"><div class="lesson-num">✓</div><div style="flex:1; font-size:.875rem; font-weight:600;">Die ersten Töne</div><span class="lesson-duration">20:15</span></div>
+      <div class="lesson-row completed"><div class="lesson-num">✓</div><div style="flex:1; font-size:.875rem; font-weight:600;">Einfache Melodien</div><span class="lesson-duration">18:50</span></div>
+      <div class="lesson-row active"><div class="lesson-num">5</div><div style="flex:1; font-size:.875rem; font-weight:700;">Der Ländler-Rhythmus</div><span class="lesson-duration">18:34</span></div>
+      <div class="lesson-row"><div class="lesson-num">6</div><div style="flex:1; font-size:.875rem;">Melodieführung rechte Hand</div><span class="lesson-duration">16:20</span></div>
+      <div class="lesson-row"><div class="lesson-num">7</div><div style="flex:1; font-size:.875rem;">Erstes vollständiges Stück</div><span class="lesson-duration">22:05</span></div>
+      <div class="lesson-row"><div class="lesson-num">8</div><div style="flex:1; font-size:.875rem;">Dynamik & Ausdruck</div><span class="lesson-duration">19:40</span></div>
+      <div class="lesson-row"><div class="lesson-num">9</div><div style="flex:1; font-size:.875rem;">Der Schottisch-Rhythmus</div><span class="lesson-duration">17:55</span></div>
+      <div class="lesson-row"><div class="lesson-num">10</div><div style="flex:1; font-size:.875rem;">Verzierungen & Ornamente</div><span class="lesson-duration">24:10</span></div>
+      <div style="padding:.5rem 1rem; font-size:.75rem; color:var(--text-muted); font-style:italic;">… 14 weitere Lektionen</div>
+    </div>
+
+    <!-- Next lesson CTA -->
+    <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+      <button class="btn btn-primary w-full" style="justify-content:center;" onclick="showToast('Nächste Lektion startet…')">▶ Weiter zu Lektion 6</button>
+    </div>
+  </aside>
+
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
