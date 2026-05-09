@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academy — LAEMU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .academy-hero {
+      padding-top: calc(var(--nav-h) + 5rem);
+      padding-bottom: 5rem;
+      background: var(--bg-dark);
+      color: var(--text-inv);
+      position: relative;
+      overflow: hidden;
+    }
+    .academy-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=1920&q=80') center/cover;
+      opacity: .18;
+    }
+    .instrument-card {
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: var(--bg-card);
+      cursor: pointer;
+      transition: transform var(--t), box-shadow var(--t);
+      display: flex;
+      flex-direction: column;
+    }
+    .instrument-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .instrument-card__thumb {
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+    }
+    .instrument-card__body { padding: 1.5rem; flex: 1; }
+    .instrument-card__name { font-size: 1.125rem; font-weight: 800; letter-spacing: -.015em; margin-bottom: .25rem; }
+    .instrument-card__levels { display: flex; gap: .375rem; flex-wrap: wrap; margin-top: .75rem; }
+
+    .course-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-card);
+      border-radius: var(--r-lg);
+      cursor: pointer;
+      transition: background var(--t), transform var(--t);
+    }
+    .course-row:hover { background: var(--bg-warm); transform: translateX(4px); }
+    .course-row__thumb {
+      width: 5rem; height: 5rem;
+      border-radius: var(--r-md);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .course-row__meta { flex: 1; }
+    .course-row__title { font-weight: 700; margin-bottom: .25rem; }
+    .course-row__sub { font-size: .8125rem; color: var(--text-muted); }
+    .course-row__badge { flex-shrink: 0; }
+
+    .teacher-card {
+      background: var(--bg-card);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      text-align: center;
+      transition: transform var(--t), box-shadow var(--t);
+    }
+    .teacher-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .teacher-card__img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      background: linear-gradient(135deg, var(--accent-warm), var(--accent-l));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; font-weight: 800; color: rgba(255,255,255,.5);
+    }
+    .teacher-card__body { padding: 1.5rem; }
+    .teacher-card__name { font-weight: 800; font-size: 1.0625rem; letter-spacing: -.01em; margin-bottom: .25rem; }
+    .teacher-card__instrument { font-size: .8125rem; color: var(--accent); font-weight: 600; }
+
+    .step-card {
+      background: var(--bg-card);
+      border-radius: var(--r-xl);
+      padding: 2rem;
+      position: relative;
+    }
+    .step-num {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: -.04em;
+      color: var(--accent-warm);
+      line-height: 1;
+      margin-bottom: .75rem;
+    }
+
+    .gamification-badge {
+      border-radius: var(--r-xl);
+      padding: 1.5rem;
+      background: var(--bg-card);
+      text-align: center;
+      transition: transform var(--t);
+    }
+    .gamification-badge:hover { transform: translateY(-3px); }
+    .gamification-badge__icon { font-size: 2.5rem; margin-bottom: .75rem; }
+    .gamification-badge__name { font-weight: 700; font-size: .9375rem; margin-bottom: .25rem; }
+    .gamification-badge__desc { font-size: .75rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+<nav class="nav dark" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">LA<span>E</span>MU</a>
+    <ul class="nav__links">
+      <li><a href="mission.html" class="nav__link">Mission</a></li>
+      <li><a href="community.html" class="nav__link">Community</a></li>
+      <li><a href="academy.html" class="nav__link active">Academy</a></li>
+      <li><a href="events.html" class="nav__link">Events</a></li>
+      <li><a href="formations.html" class="nav__link">Formationen</a></li>
+      <li><a href="shop.html" class="nav__link">Shop</a></li>
+      <li><a href="contact.html" class="nav__link">Kontakt</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a href="member-academy.html" class="nav__cta">Academy starten</a>
+      <button class="nav__hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="mission.html" class="nav__mobile-link">Mission</a>
+  <a href="community.html" class="nav__mobile-link">Community</a>
+  <a href="academy.html" class="nav__mobile-link">Academy</a>
+  <a href="events.html" class="nav__mobile-link">Events</a>
+  <a href="formations.html" class="nav__mobile-link">Formationen</a>
+  <a href="shop.html" class="nav__mobile-link">Shop</a>
+  <a href="contact.html" class="nav__mobile-link">Kontakt</a>
+  <a href="member-academy.html" class="btn btn-primary btn-lg mt-4">Academy starten</a>
+</div>
+
+<!-- HERO -->
+<section class="academy-hero">
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="section-label" style="color:var(--accent-l); margin-bottom:1.5rem;">LAEMU Academy</div>
+    <h1 class="display-xl fade-up" style="max-width:820px; margin-bottom:1.5rem;">
+      Lerne. Wachse.<br>Feiere deinen Fortschritt.
+    </h1>
+    <p class="body-lg fade-up" style="color:rgba(255,255,255,.6); max-width:560px; margin-bottom:2.5rem; transition-delay:.1s;">
+      Premium-Kurse für Ländlermusik-Instrumente. Von erfahrenen Lehrern. In deinem Tempo. Mit einer starken Community an deiner Seite.
+    </p>
+    <div class="flex gap-2 flex-wrap fade-up" style="transition-delay:.2s;">
+      <a href="member-academy.html" class="btn btn-white btn-lg">Academy starten</a>
+      <a href="#kurse" class="btn btn-ghost btn-lg">Kurse entdecken</a>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUMENTS -->
+<section class="section" id="kurse">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Instrumente</div>
+      <h2 class="display-md fade-up">Wähle dein Instrument.</h2>
+      <p class="body-lg text-muted fade-up" style="max-width:480px; margin:.75rem auto 0; transition-delay:.1s;">
+        Für jedes Ländlermusik-Instrument findest du passende Kurse — von Schnuppern bis Profi.
+      </p>
+    </div>
+    <div class="grid-3 stagger" style="gap:1.5rem;">
+      <div class="instrument-card fade-up">
+        <div class="instrument-card__thumb" style="background:linear-gradient(135deg,#8B6F47,#5A4530);">🪗</div>
+        <div class="instrument-card__body">
+          <div class="instrument-card__name">Handorgel</div>
+          <div class="body-sm">Das Herzstück der Ländlermusik. Von Grundgriffen bis zu komplexen Arrangements.</div>
+          <div class="instrument-card__levels">
+            <span class="tag tag-warm">Anfänger</span>
+            <span class="tag tag-warm">Fortgeschritten</span>
+            <span class="tag tag-warm">Profi</span>
+          </div>
+          <div style="margin-top:1rem; font-size:.8125rem; color:var(--text-muted);">🎥 48 Videos · 3 Kurse</div>
+        </div>
+      </div>
+      <div class="instrument-card fade-up">
+        <div class="instrument-card__thumb" style="background:linear-gradient(135deg,#C4A882,#8B6F47);">🎵</div>
+        <div class="instrument-card__body">
+          <div class="instrument-card__name">Schwyzerörgeli</div>
+          <div class="body-sm">Das Seeleninstrument der Innerschweiz. Tradition und Technik in einem.</div>
+          <div class="instrument-card__levels">
+            <span class="tag tag-warm">Anfänger</span>
+            <span class="tag tag-warm">Fortgeschritten</span>
+            <span class="tag tag-warm">Profi</span>
+          </div>
+          <div style="margin-top:1rem; font-size:.8125rem; color:var(--text-muted);">🎥 62 Videos · 4 Kurse</div>
+        </div>
+      </div>
+      <div class="instrument-card fade-up">
+        <div class="instrument-card__thumb" style="background:linear-gradient(135deg,#2C2A27,#4A4440);">🎹</div>
+        <div class="instrument-card__body">
+          <div class="instrument-card__name">Klavier / Piano</div>
+          <div class="body-sm">Begleitung, Arrangement und Improvisation für die Ländlerband.</div>
+          <div class="instrument-card__levels">
+            <span class="tag tag-warm">Anfänger</span>
+            <span class="tag tag-warm">Fortgeschritten</span>
+          </div>
+          <div style="margin-top:1rem; font-size:.8125rem; color:var(--text-muted);">🎥 34 Videos · 2 Kurse</div>
+        </div>
+      </div>
+      <div class="instrument-card fade-up">
+        <div class="instrument-card__thumb" style="background:linear-gradient(135deg,#D4C5B0,#C4A882);">🎸</div>
+        <div class="instrument-card__body">
+          <div class="instrument-card__name">Bass</div>
+          <div class="body-sm">Das Fundament der Band. Rhythmus, Timing und der Groove der Ländlermusik.</div>
+          <div class="instrument-card__levels">
+            <span class="tag tag-warm">Anfänger</span>
+            <span class="tag tag-warm">Fortgeschritten</span>
+          </div>
+          <div style="margin-top:1rem; font-size:.8125rem; color:var(--text-muted);">🎥 28 Videos · 2 Kurse</div>
+        </div>
+      </div>
+      <div class="instrument-card fade-up">
+        <div class="instrument-card__thumb" style="background:linear-gradient(135deg,#EEE8DF,#D4C5B0);">🎷</div>
+        <div class="instrument-card__body">
+          <div class="instrument-card__name">Klarinette</div>
+          <div class="body-sm">Melodisch, ausdrucksstark. Volksmusik-Klarinette mit Stil und Technik.</div>
+          <div class="instrument-card__levels">
+            <span class="tag tag-warm">Anfänger</span>
+            <span class="tag tag-warm">Fortgeschritten</span>
+          </div>
+          <div style="margin-top:1rem; font-size:.8125rem; color:var(--text-muted);">🎥 22 Videos · 2 Kurse</div>
+        </div>
+      </div>
+      <div class="instrument-card fade-up">
+        <div class="instrument-card__thumb" style="background:linear-gradient(135deg,#8B6F47,#C4A882);">🎷</div>
+        <div class="instrument-card__body">
+          <div class="instrument-card__name">Saxophon</div>
+          <div class="body-sm">Modern und vielseitig. Saxophon in der zeitgenössischen Volksmusik.</div>
+          <div class="instrument-card__levels">
+            <span class="tag tag-warm">Anfänger</span>
+            <span class="tag tag-warm">Fortgeschritten</span>
+          </div>
+          <div style="margin-top:1rem; font-size:.8125rem; color:var(--text-muted);">🎥 19 Videos · 2 Kurse</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section bg-dark">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:4rem;">
+      <div class="section-label" style="color:var(--accent-l); justify-content:center;">So funktioniert's</div>
+      <h2 class="display-md text-inv fade-up">In 4 Schritten zum Ziel.</h2>
+    </div>
+    <div class="grid-4 stagger">
+      <div class="step-card fade-up" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06);">
+        <div class="step-num">01</div>
+        <h3 style="color:#fff; font-weight:700; margin-bottom:.5rem;">Kurs wählen</h3>
+        <p style="color:rgba(255,255,255,.45); font-size:.875rem; line-height:1.6;">Wähle dein Instrument und deinen Kurs — vom Schnupperkurs bis zum Pro-Level.</p>
+      </div>
+      <div class="step-card fade-up" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); transition-delay:.1s;">
+        <div class="step-num">02</div>
+        <h3 style="color:#fff; font-weight:700; margin-bottom:.5rem;">Zugang erhalten</h3>
+        <p style="color:rgba(255,255,255,.45); font-size:.875rem; line-height:1.6;">Sofortiger Zugang zu allen Videos, PDFs und Noten. Inkl. Community-Mitgliedschaft.</p>
+      </div>
+      <div class="step-card fade-up" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); transition-delay:.2s;">
+        <div class="step-num">03</div>
+        <h3 style="color:#fff; font-weight:700; margin-bottom:.5rem;">Lernen & Wachsen</h3>
+        <p style="color:rgba(255,255,255,.45); font-size:.875rem; line-height:1.6;">Lerne in deinem Tempo. Live Calls, Feedback von Lehrern, Lernwochenenden und Camps.</p>
+      </div>
+      <div class="step-card fade-up" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); transition-delay:.3s;">
+        <div class="step-num">04</div>
+        <h3 style="color:#fff; font-weight:700; margin-bottom:.5rem;">Fortschritt feiern</h3>
+        <p style="color:rgba(255,255,255,.45); font-size:.875rem; line-height:1.6;">Sammle Badges, teile deinen Fortschritt in der Community und inspirierie andere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED COURSES -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Beliebte Kurse</div>
+      <h2 class="display-md fade-up">Starte jetzt durch.</h2>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:1rem;" class="stagger">
+      <a href="member-academy.html" class="course-row fade-up" style="text-decoration:none; color:inherit;">
+        <div class="course-row__thumb" style="background:linear-gradient(135deg,#8B6F47,#5A4530);">🪗</div>
+        <div class="course-row__meta">
+          <div class="course-row__title">Handorgel — Starterkurs</div>
+          <div class="course-row__sub">mit Andreas Kälin · 24 Lektionen · 8h Videomaterial</div>
+        </div>
+        <div class="course-row__badge"><span class="tag tag-warm">Beliebt</span></div>
+        <div style="font-weight:700; font-size:.9375rem; white-space:nowrap;">CHF 19/Mt</div>
+      </a>
+      <a href="member-academy.html" class="course-row fade-up" style="text-decoration:none; color:inherit;">
+        <div class="course-row__thumb" style="background:linear-gradient(135deg,#C4A882,#8B6F47);">🎵</div>
+        <div class="course-row__meta">
+          <div class="course-row__title">Schwyzerörgeli — Schnupperkurs</div>
+          <div class="course-row__sub">mit Maria Lustenberger · 8 Lektionen · 3h Videomaterial</div>
+        </div>
+        <div class="course-row__badge"><span class="tag tag-accent" style="font-size:.6rem;">Gratis Probe</span></div>
+        <div style="font-weight:700; font-size:.9375rem; white-space:nowrap;">Kostenlos</div>
+      </a>
+      <a href="member-academy.html" class="course-row fade-up" style="text-decoration:none; color:inherit;">
+        <div class="course-row__thumb" style="background:linear-gradient(135deg,#2C2A27,#4A4440);">🎹</div>
+        <div class="course-row__meta">
+          <div class="course-row__title">Klavier Begleitung — Pro-Kurs</div>
+          <div class="course-row__sub">mit Hansruedi Kaufmann · 36 Lektionen · 12h Videomaterial</div>
+        </div>
+        <div class="course-row__badge"><span class="tag tag-dark" style="font-size:.65rem;">Pro</span></div>
+        <div style="font-weight:700; font-size:.9375rem; white-space:nowrap;">CHF 19/Mt</div>
+      </a>
+      <a href="member-academy.html" class="course-row fade-up" style="text-decoration:none; color:inherit;">
+        <div class="course-row__thumb" style="background:linear-gradient(135deg,#D4C5B0,#C4A882);">🎸</div>
+        <div class="course-row__meta">
+          <div class="course-row__title">Bass für Ländlermusik — Starterkurs</div>
+          <div class="course-row__sub">mit Tobias Renggli · 18 Lektionen · 6h Videomaterial</div>
+        </div>
+        <div class="course-row__badge"><span class="tag tag-warm">Neu</span></div>
+        <div style="font-weight:700; font-size:.9375rem; white-space:nowrap;">CHF 19/Mt</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHERS -->
+<section class="section bg-warm">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Lehrerinnen & Lehrer</div>
+      <h2 class="display-md fade-up">Lerne von den Besten.</h2>
+    </div>
+    <div class="grid-4 stagger" style="gap:1.5rem;">
+      <div class="teacher-card fade-up">
+        <div class="teacher-card__img">AK</div>
+        <div class="teacher-card__body">
+          <div class="teacher-card__name">Andreas Kälin</div>
+          <div class="teacher-card__instrument">Handorgel</div>
+          <p class="body-sm" style="margin-top:.5rem;">20 Jahre Bühnenerfahrung. Einfühlsamer Lehrer mit System.</p>
+        </div>
+      </div>
+      <div class="teacher-card fade-up">
+        <div class="teacher-card__img" style="background:linear-gradient(135deg,#C4A882,#8B6F47);">ML</div>
+        <div class="teacher-card__body">
+          <div class="teacher-card__name">Maria Lustenberger</div>
+          <div class="teacher-card__instrument">Schwyzerörgeli</div>
+          <p class="body-sm" style="margin-top:.5rem;">Virtuosin und Musikpädagogin aus dem Herzen der Innerschweiz.</p>
+        </div>
+      </div>
+      <div class="teacher-card fade-up">
+        <div class="teacher-card__img" style="background:linear-gradient(135deg,#2C2A27,#4A4440);">HK</div>
+        <div class="teacher-card__body">
+          <div class="teacher-card__name">Hansruedi Kaufmann</div>
+          <div class="teacher-card__instrument">Klavier / Arrangement</div>
+          <p class="body-sm" style="margin-top:.5rem;">Arrangeur und Begleiter. Komponist zahlreicher Ländler.</p>
+        </div>
+      </div>
+      <div class="teacher-card fade-up">
+        <div class="teacher-card__img" style="background:linear-gradient(135deg,#D4C5B0,#C4A882); color:var(--accent-deep);">KS</div>
+        <div class="teacher-card__body">
+          <div class="teacher-card__name">Katharina Schüpfer</div>
+          <div class="teacher-card__instrument">Klarinette</div>
+          <p class="body-sm" style="margin-top:.5rem;">Pädagogin und Performerin. Macht Lernenden Mut.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFLINE EVENTS -->
+<section class="section">
+  <div class="container">
+    <div class="split">
+      <div class="fade-up">
+        <div class="section-label">Mehr als Online</div>
+        <h2 class="display-md" style="margin-bottom:1.5rem;">Lernwochenenden. Camps. Live Calls.</h2>
+        <p class="body-lg text-muted" style="margin-bottom:1.5rem;">Die Academy ist mehr als Videos schauen. Wir bringen dich mit echten Menschen zusammen — in der Natur, in der Gemeinschaft, auf der Bühne.</p>
+        <ul style="display:flex; flex-direction:column; gap:.875rem; margin-bottom:2rem;">
+          <li style="display:flex; align-items:center; gap:.875rem; font-size:.9375rem;">
+            <span style="font-size:1.25rem;">🏔️</span>
+            <span><strong>Lernwochenenden</strong> in der Schweizer Bergwelt</span>
+          </li>
+          <li style="display:flex; align-items:center; gap:.875rem; font-size:.9375rem;">
+            <span style="font-size:1.25rem;">🎓</span>
+            <span><strong>Sommer-Camps</strong> für Kinder, Jugendliche und Erwachsene</span>
+          </li>
+          <li style="display:flex; align-items:center; gap:.875rem; font-size:.9375rem;">
+            <span style="font-size:1.25rem;">📹</span>
+            <span><strong>Live Calls</strong> mit deinem Lehrer — monatlich</span>
+          </li>
+          <li style="display:flex; align-items:center; gap:.875rem; font-size:.9375rem;">
+            <span style="font-size:1.25rem;">🤝</span>
+            <span><strong>Community Challenges</strong> — online und offline</span>
+          </li>
+        </ul>
+        <a href="events.html" class="btn btn-primary btn-arrow">Alle Events entdecken</a>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s;">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" alt="Schweizer Bergwelt" class="img-cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAMIFICATION -->
+<section class="section bg-dark">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="color:var(--accent-l); justify-content:center;">Gamification</div>
+      <h2 class="display-md text-inv fade-up">Dein Fortschritt. Deine Meilensteine.</h2>
+      <p class="body-lg fade-up" style="color:rgba(255,255,255,.5); max-width:480px; margin:.75rem auto 0; transition-delay:.1s;">Jede Lektion bringt dich weiter. Samle Badges, halte Streaks und erreiche neue Levels.</p>
+    </div>
+    <div class="grid-4 stagger" style="gap:1.25rem;">
+      <div class="gamification-badge fade-up" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06);">
+        <div class="gamification-badge__icon">🔥</div>
+        <div class="gamification-badge__name" style="color:#fff;">7-Tage Streak</div>
+        <div class="gamification-badge__desc" style="color:rgba(255,255,255,.35);">7 Tage in Folge gelernt</div>
+      </div>
+      <div class="gamification-badge fade-up" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); transition-delay:.1s;">
+        <div class="gamification-badge__icon">⭐</div>
+        <div class="gamification-badge__name" style="color:#fff;">Erste Lektion</div>
+        <div class="gamification-badge__desc" style="color:rgba(255,255,255,.35);">Dein musikalischer Weg beginnt</div>
+      </div>
+      <div class="gamification-badge fade-up" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); transition-delay:.2s;">
+        <div class="gamification-badge__icon">🏆</div>
+        <div class="gamification-badge__name" style="color:#fff;">Kurs abgeschlossen</div>
+        <div class="gamification-badge__desc" style="color:rgba(255,255,255,.35);">Ersten vollständigen Kurs beendet</div>
+      </div>
+      <div class="gamification-badge fade-up" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); transition-delay:.3s;">
+        <div class="gamification-badge__icon">🎶</div>
+        <div class="gamification-badge__name" style="color:#fff;">Community Star</div>
+        <div class="gamification-badge__desc" style="color:rgba(255,255,255,.35);">Fortschritt geteilt & bewertet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Stimmen</div>
+      <h2 class="display-md fade-up">Was Lernende sagen.</h2>
+    </div>
+    <div class="grid-3 stagger" style="gap:1.5rem;">
+      <div class="testimonial fade-up">
+        <div class="testimonial__quote">"Ich habe die Handorgel jahrelang aufgeschoben. Mit der LAEMU Academy habe ich endlich angefangen — und mache riesige Fortschritte."</div>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar-placeholder">RF</div>
+          <div>
+            <div style="font-weight:700; font-size:.9375rem;">Rolf Frei</div>
+            <div class="body-sm">Handorgel-Lernender, Zug</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial fade-up" style="transition-delay:.1s;">
+        <div class="testimonial__quote">"Die Lehrerin ist unglaublich. Klare Erklärungen, echte Praxis, immer hilfreich. Die beste Investition für mein Schwyzerörgeli-Lernen."</div>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar-placeholder">SP</div>
+          <div>
+            <div style="font-weight:700; font-size:.9375rem;">Sandra Portmann</div>
+            <div class="body-sm">Schwyzerörgeli, Nidwalden</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial fade-up" style="transition-delay:.2s;">
+        <div class="testimonial__quote">"Das Lernwochenende in Engelberg war ein Erlebnis für die Ewigkeit. Neue Freunde, neue Stücke, neue Motivation."</div>
+        <div class="testimonial__author">
+          <div class="testimonial__avatar-placeholder">JK</div>
+          <div>
+            <div style="font-weight:700; font-size:.9375rem;">Jonas Küng</div>
+            <div class="body-sm">Klarinette, Luzern</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section bg-warm" id="preise">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:4rem;">
+      <div class="section-label" style="justify-content:center;">Preise</div>
+      <h2 class="display-md fade-up">Fair. Transparent. Flexibel.</h2>
+      <p class="body-lg text-muted fade-up" style="max-width:480px; margin:.75rem auto 0; transition-delay:.1s;">
+        Academy-Mitglieder erhalten automatisch vollen Zugang zur LAEMU Community.
+      </p>
+    </div>
+    <div class="grid-3 stagger" style="max-width:960px; margin:0 auto; gap:2rem;">
+      <div class="price-card fade-up">
+        <div class="label text-muted" style="margin-bottom:1rem;">Schnupperkurs</div>
+        <div class="price-card__amount">Gratis</div>
+        <ul class="price-card__features">
+          <li>8 Gratislektionen pro Instrument</li>
+          <li>Community-Vorschau</li>
+          <li>Keine Kreditkarte nötig</li>
+        </ul>
+        <a href="member-academy.html" class="btn btn-outline w-full" style="justify-content:center;">Kostenlos starten</a>
+      </div>
+      <div class="price-card featured fade-up" style="transition-delay:.1s;">
+        <div class="price-card__badge">Empfohlen</div>
+        <div class="label" style="color:rgba(255,255,255,.4); margin-bottom:1rem;">Starterkurs</div>
+        <div class="price-card__amount">CHF 19<span class="price-card__period">/Mt</span></div>
+        <ul class="price-card__features">
+          <li>Alle Starter-Kurse</li>
+          <li>Community inklusive</li>
+          <li>PDFs & Notenblätter</li>
+          <li>Kommentare & Feedback</li>
+          <li>Monthly Live Call</li>
+        </ul>
+        <a href="member-academy.html" class="btn btn-white w-full" style="justify-content:center;">Jetzt starten</a>
+      </div>
+      <div class="price-card fade-up" style="transition-delay:.2s;">
+        <div class="label text-muted" style="margin-bottom:1rem;">Pro-Kurs</div>
+        <div class="price-card__amount">CHF 39<span class="price-card__period">/Mt</span></div>
+        <ul class="price-card__features">
+          <li>Alle Kurse aller Level</li>
+          <li>Community inklusive</li>
+          <li>Priorisiertes Lehrer-Feedback</li>
+          <li>Wöchentliche Live Calls</li>
+          <li>Lernwochenenden rabattiert</li>
+          <li>Exklusive Pro-Inhalte</li>
+        </ul>
+        <a href="member-academy.html" class="btn btn-primary w-full" style="justify-content:center;">Pro starten</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container container-sm">
+    <div style="text-align:center; margin-bottom:3rem;">
+      <div class="section-label" style="justify-content:center;">FAQ</div>
+      <h2 class="display-sm fade-up">Häufige Fragen.</h2>
+    </div>
+    <div class="fade-in">
+      <div class="faq-item">
+        <button class="faq-question">Benötige ich Vorkenntnisse?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer__inner">Nein! Unsere Schnupperkurse starten bei Null. Du brauchst nur dein Instrument und Freude am Lernen.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Kann ich jederzeit kündigen?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer__inner">Ja. Du kannst monatlich kündigen — keine Mindestlaufzeit, keine Zusatzkosten. Einfach über dein Profil.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Ist die Community im Abo inklusive?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer__inner">Ja! Jedes bezahlte Academy-Abo enthält automatisch vollen Zugang zur exklusiven LAEMU Community.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Kann ich ein Instrument wechseln oder mehrere belegen?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer__inner">Mit dem Starterkurs hast du Zugang zu allen Starter-Kursen aller Instrumente. Du kannst jederzeit wechseln oder parallel lernen.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Wie funktionieren die Live Calls?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer__inner">Live Calls finden via Zoom statt. Du kannst Fragen stellen, dich korrigieren lassen und direkt mit dem Lehrer interagieren. Aufzeichnungen sind danach im Kursbereich verfügbar.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section style="background:var(--bg-dark); padding:clamp(6rem,12vw,12rem) 0; text-align:center; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=1920&q=80') center/cover; opacity:.12;"></div>
+  <div class="container" style="position:relative; z-index:2;">
+    <div class="script fade-in" style="color:var(--accent-l); font-size:2.5rem; margin-bottom:1rem;">Dein nächstes Level wartet</div>
+    <h2 class="display-lg text-inv fade-up" style="max-width:700px; margin:0 auto 1.5rem;">
+      Bereit für dein nächstes musikalisches Level?
+    </h2>
+    <p class="body-lg fade-up" style="color:rgba(255,255,255,.5); max-width:460px; margin:0 auto 2.5rem; transition-delay:.1s;">
+      Starte heute kostenlos. Kein Abo nötig. Lass dich von echten Lehrern begeistern.
+    </p>
+    <div class="flex-center gap-2 flex-wrap fade-up" style="transition-delay:.2s;">
+      <a href="member-academy.html" class="btn btn-white btn-lg">Gratis Schnuppern</a>
+      <a href="#preise" class="btn btn-ghost btn-lg">Preise vergleichen</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">LA<span>E</span>MU</div>
+        <div class="footer__tagline">Am Puls der Ländlermusik.</div>
+        <div class="social-links" style="margin-top:1.75rem;"><a href="#" class="social-link">📷</a><a href="#" class="social-link">📘</a><a href="#" class="social-link">▶️</a><a href="#" class="social-link">🎵</a></div>
+      </div>
+      <div><div class="footer__heading">Plattform</div><ul class="footer__links"><li><a href="community.html" class="footer__link">Community</a></li><li><a href="academy.html" class="footer__link">Academy</a></li><li><a href="events.html" class="footer__link">Events</a></li><li><a href="formations.html" class="footer__link">Formationen</a></li><li><a href="shop.html" class="footer__link">Shop</a></li></ul></div>
+      <div><div class="footer__heading">LAEMU</div><ul class="footer__links"><li><a href="mission.html" class="footer__link">Mission</a></li><li><a href="contact.html" class="footer__link">Kontakt</a></li></ul></div>
+      <div><div class="footer__heading">Rechtliches</div><ul class="footer__links"><li><a href="#" class="footer__link">Datenschutz</a></li><li><a href="#" class="footer__link">AGB</a></li><li><a href="#" class="footer__link">Impressum</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>© 2025 LAEMU.</span><span>Made with ❤️ für die Schweizer Volksmusik</span></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

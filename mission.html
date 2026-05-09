@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission — LAEMU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .mission-hero {
+      padding-top: calc(var(--nav-h) + 5rem);
+      padding-bottom: 5rem;
+      background: var(--bg-dark);
+      color: var(--text-inv);
+      position: relative;
+      overflow: hidden;
+    }
+    .mission-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=1920&q=80') center/cover;
+      opacity: .18;
+    }
+    .usp-card {
+      background: var(--bg-card);
+      border-radius: var(--r-xl);
+      padding: 2.5rem;
+      border-top: 3px solid var(--accent);
+    }
+    .target-card {
+      background: var(--bg-card);
+      border-radius: var(--r-xl);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: transform var(--t), box-shadow var(--t);
+    }
+    .target-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .target-icon {
+      width: 3.5rem; height: 3.5rem;
+      border-radius: var(--r-md);
+      background: var(--bg-warm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .team-card {
+      background: var(--bg-card);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+    .team-card__img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+    .partner-logo {
+      height: 48px;
+      background: var(--bg-card);
+      border-radius: var(--r-md);
+      padding: .75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .875rem;
+      color: var(--text-muted);
+      letter-spacing: .03em;
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav dark" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">LA<span>E</span>MU</a>
+    <ul class="nav__links">
+      <li><a href="mission.html" class="nav__link active">Mission</a></li>
+      <li><a href="community.html" class="nav__link">Community</a></li>
+      <li><a href="academy.html" class="nav__link">Academy</a></li>
+      <li><a href="events.html" class="nav__link">Events</a></li>
+      <li><a href="formations.html" class="nav__link">Formationen</a></li>
+      <li><a href="shop.html" class="nav__link">Shop</a></li>
+      <li><a href="contact.html" class="nav__link">Kontakt</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a href="member-community.html" class="nav__cta">Mitglied werden</a>
+      <button class="nav__hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="mission.html" class="nav__mobile-link">Mission</a>
+  <a href="community.html" class="nav__mobile-link">Community</a>
+  <a href="academy.html" class="nav__mobile-link">Academy</a>
+  <a href="events.html" class="nav__mobile-link">Events</a>
+  <a href="formations.html" class="nav__mobile-link">Formationen</a>
+  <a href="shop.html" class="nav__mobile-link">Shop</a>
+  <a href="contact.html" class="nav__mobile-link">Kontakt</a>
+  <a href="member-community.html" class="btn btn-primary btn-lg mt-4">Mitglied werden</a>
+</div>
+
+<!-- HERO -->
+<section class="mission-hero">
+  <div class="container" style="position:relative; z-index:2;">
+    <div class="section-label" style="color:var(--accent-l); margin-bottom:1.5rem;">Unsere Mission</div>
+    <h1 class="display-xl fade-up" style="max-width:800px; margin-bottom:1.5rem;">
+      Etwas Grosses beginnt immer mit den Ersten.
+    </h1>
+    <p class="body-lg fade-up" style="color:rgba(255,255,255,.6); max-width:560px; transition-delay:.1s;">
+      LAEMU ist die zentrale digitale Plattform für Schweizer Ländlermusik — modern, lebendig und für alle da.
+    </p>
+  </div>
+</section>
+
+<!-- WHAT IS LAEMU -->
+<section class="section">
+  <div class="container">
+    <div class="split">
+      <div class="fade-up">
+        <div class="section-label">Was ist LAEMU?</div>
+        <h2 class="display-md" style="margin-bottom:1.5rem;">Eine Plattform. Eine Bewegung.</h2>
+        <p class="body-lg text-muted" style="margin-bottom:1.25rem;">
+          LAEMU steht für <strong>LÄndlerMUsik</strong> — und für die Überzeugung, dass diese reiche Kulturtradition der Schweiz ein starkes, modernes digitales Zuhause verdient.
+        </p>
+        <p class="body-lg text-muted" style="margin-bottom:1.25rem;">
+          Wir sind kein Museum. Wir sind kein Archiv. Wir sind ein lebendiger, pulsierender Ort, an dem Tradition auf Zukunft trifft — wo Musiker Lernende werden, Fans zu Gemeinschaft wachsen und Formationen neue Bühnen finden.
+        </p>
+        <p class="body-lg text-muted">
+          LAEMU verbindet Community, Bildung, Events, Formation-Verzeichnis, Streaming, Shop und Kulturerbe unter einem Dach.
+        </p>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s;">
+        <img
+          src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80"
+          alt="Gemeinschaft"
+          class="img-cover"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USPs -->
+<section class="section bg-warm">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Was uns unterscheidet</div>
+      <h2 class="display-md fade-up">Drei starke Versprechen.</h2>
+    </div>
+    <div class="grid-3 stagger">
+      <div class="usp-card fade-up">
+        <div style="font-size:2.5rem; margin-bottom:1.25rem;">🌐</div>
+        <h3 class="display-sm" style="margin-bottom:.75rem;">Digital & Modern</h3>
+        <p class="body-md text-muted">LAEMU ist die erste wirklich moderne digitale Plattform für Ländlermusik. Kein Forum aus den 2000ern — sondern ein Erlebnis, das mit Apple, Spotify und Instagram mithalten kann.</p>
+      </div>
+      <div class="usp-card fade-up" style="transition-delay:.1s;">
+        <div style="font-size:2.5rem; margin-bottom:1.25rem;">❤️</div>
+        <h3 class="display-sm" style="margin-bottom:.75rem;">Community-Getrieben</h3>
+        <p class="body-md text-muted">Nicht ein Konzern entscheidet, was auf LAEMU passiert — die Community tut es. Ideen, Inhalte, Kurse und Events entstehen aus der Mitte der Szene heraus.</p>
+      </div>
+      <div class="usp-card fade-up" style="transition-delay:.2s;">
+        <div style="font-size:2.5rem; margin-bottom:1.25rem;">🔗</div>
+        <h3 class="display-sm" style="margin-bottom:.75rem;">Alles vernetzt</h3>
+        <p class="body-md text-muted">Community, Academy, Events, Formationen, Shop — alles ist miteinander verbunden. Wer bei LAEMU ist, profitiert von einem kompletten Ökosystem, das täglich wächst.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Zielgruppen</div>
+      <h2 class="display-md fade-up">Für wen ist LAEMU da?</h2>
+      <p class="body-lg text-muted fade-up" style="max-width:520px; margin:.75rem auto 0; transition-delay:.1s;">
+        LAEMU ist für alle, die Ländlermusik lieben — egal ob profi oder anfänger, jung oder erfahren.
+      </p>
+    </div>
+    <div class="grid-3 stagger" style="gap:1.5rem;">
+      <div class="target-card fade-up">
+        <div class="target-icon">🎻</div>
+        <div>
+          <div style="font-weight:700; font-size:1.0625rem; margin-bottom:.25rem;">Musikerinnen & Musiker</div>
+          <div class="body-sm">Teile deine Musik, finde Gleichgesinnte, lerne neue Techniken und werde sichtbar — lokal und national.</div>
+        </div>
+      </div>
+      <div class="target-card fade-up">
+        <div class="target-icon">🎼</div>
+        <div>
+          <div style="font-weight:700; font-size:1.0625rem; margin-bottom:.25rem;">Formationen</div>
+          <div class="body-sm">Erstelle dein Profil, präsentiere deine Musik, erhalte Buchungsanfragen und verkaufe deine Produkte.</div>
+        </div>
+      </div>
+      <div class="target-card fade-up">
+        <div class="target-icon">💛</div>
+        <div>
+          <div style="font-weight:700; font-size:1.0625rem; margin-bottom:.25rem;">Fans & Liebhaber</div>
+          <div class="body-sm">Entdecke neue Formationen, besuche Events, tauche in die Kulturwelt ein und werde Teil der Community.</div>
+        </div>
+      </div>
+      <div class="target-card fade-up">
+        <div class="target-icon">📚</div>
+        <div>
+          <div style="font-weight:700; font-size:1.0625rem; margin-bottom:.25rem;">Lernende</div>
+          <div class="body-sm">Finde den perfekten Kurs, lerne von erfahrenen Lehrern und feiere deinen Fortschritt gemeinsam mit der Community.</div>
+        </div>
+      </div>
+      <div class="target-card fade-up">
+        <div class="target-icon">📅</div>
+        <div>
+          <div style="font-weight:700; font-size:1.0625rem; margin-bottom:.25rem;">Veranstalter</div>
+          <div class="body-sm">Finde die passende Formation für deinen Anlass, publiziere Events und erreiche das richtige Publikum.</div>
+        </div>
+      </div>
+      <div class="target-card fade-up">
+        <div class="target-icon">🌱</div>
+        <div>
+          <div style="font-weight:700; font-size:1.0625rem; margin-bottom:.25rem;">Nächste Generation</div>
+          <div class="body-sm">Kinder und Jugendliche finden bei LAEMU einen inspirierenden Einstieg in die Welt der Ländlermusik.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRIBUTE CTA -->
+<div class="parallax-section" style="min-height:55vh;">
+  <div class="parallax-bg" style="background-image:url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1920&q=80');"></div>
+  <div class="parallax-overlay"></div>
+  <div class="container" style="position:relative; z-index:2; color:#fff; text-align:center;">
+    <div class="script fade-in" style="color:var(--accent-l); margin-bottom:1rem;">Du kannst mitgestalten</div>
+    <h2 class="display-lg fade-up" style="max-width:700px; margin:0 auto 1.5rem; transition-delay:.1s;">Bringe dein Talent, dein Wissen, deine Ideen.</h2>
+    <p class="body-lg fade-up" style="opacity:.65; max-width:480px; margin:0 auto 2.5rem; transition-delay:.2s;">
+      LAEMU ist ein Gemeinschaftsprojekt. Wir laden alle ein, aktiv beizutragen — als Musiker, Lehrer, Kurator, Botschafter oder Supporter.
+    </p>
+    <div class="flex-center gap-2 flex-wrap fade-up" style="transition-delay:.3s;">
+      <a href="contact.html" class="btn btn-white btn-lg">Idee einbringen</a>
+      <a href="member-community.html" class="btn btn-ghost btn-lg">Community beitreten</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOUNDERS -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:4rem;">
+      <div class="section-label" style="justify-content:center;">Die Gründer</div>
+      <h2 class="display-md fade-up">Zwei Stärken. Eine gemeinsame Mission.</h2>
+    </div>
+    <div class="grid-2 stagger" style="max-width:960px; margin:0 auto; gap:3rem; align-items:start;">
+      <div class="fade-up">
+        <div style="background:linear-gradient(135deg,#EEE8DF,#D4C5B0); border-radius:var(--r-xl); height:360px; display:flex; align-items:center; justify-content:center; margin-bottom:2rem; font-size:8rem; opacity:.5;">🎻</div>
+        <h3 style="font-size:2rem; font-weight:800; letter-spacing:-.025em; margin-bottom:.25rem;">Niklaus Hess</h3>
+        <div style="color:var(--accent); font-weight:600; font-size:.9375rem; margin-bottom:1rem;">Volksmusik · Community · Netzwerk</div>
+        <p class="body-md text-muted" style="margin-bottom:1rem;">Niklaus ist sein Leben lang mit der Schweizer Volksmusikszene verbunden. Er kennt die Szene von innen, versteht ihre Bedürfnisse und trägt das Herzstück von LAEMU.</p>
+        <p class="body-md text-muted">Seine Mission: Die Ländlermusik mit einem Ort zu stärken, der ihr gerecht wird — und sie für kommende Generationen lebendig hält.</p>
+        <div style="margin-top:1.5rem;">
+          <a href="contact.html" class="btn btn-outline btn-sm">Fragen zur Musik & Academy</a>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s;">
+        <div style="background:linear-gradient(135deg,#2C2A27,#4A4440); border-radius:var(--r-xl); height:360px; display:flex; align-items:center; justify-content:center; margin-bottom:2rem; font-size:8rem; opacity:.4;">✦</div>
+        <h3 style="font-size:2rem; font-weight:800; letter-spacing:-.025em; margin-bottom:.25rem;">Selina Strickler</h3>
+        <div style="color:var(--accent); font-weight:600; font-size:.9375rem; margin-bottom:1rem;">Branding · Digital · Marketing</div>
+        <p class="body-md text-muted" style="margin-bottom:1rem;">Selina sieht, was andere nicht sehen: das riesige Potenzial der Ländlermusik als moderne, starke Marke. Mit Expertise in Branding und digitaler Strategie gestaltet sie LAEMU's Gesicht.</p>
+        <p class="body-md text-muted">Ihr Ziel: LAEMU zu einer Bewegung zu machen, die die Welt sieht — und die stolz getragen wird.</p>
+        <div style="margin-top:1.5rem;">
+          <a href="contact.html" class="btn btn-outline btn-sm">Fragen zu Branding & Kooperationen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section bg-warm">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Das Team</div>
+      <h2 class="display-md fade-up">Alle, die LAEMU möglich machen.</h2>
+    </div>
+    <div class="grid-4 stagger" style="gap:1.5rem;">
+      <div class="team-card fade-up">
+        <div style="aspect-ratio:1; background:linear-gradient(135deg,#C4A882,#8B6F47); display:flex; align-items:center; justify-content:center; font-size:3rem; font-weight:800; color:rgba(255,255,255,.5);">AK</div>
+        <div style="padding:1.25rem;">
+          <div style="font-weight:700; margin-bottom:.125rem;">Andreas Kälin</div>
+          <div style="font-size:.8125rem; color:var(--accent); font-weight:600;">Musiklehrer · Handorgel</div>
+        </div>
+      </div>
+      <div class="team-card fade-up">
+        <div style="aspect-ratio:1; background:linear-gradient(135deg,#D4C5B0,#C4A882); display:flex; align-items:center; justify-content:center; font-size:3rem; font-weight:800; color:rgba(255,255,255,.6);">LM</div>
+        <div style="padding:1.25rem;">
+          <div style="font-weight:700; margin-bottom:.125rem;">Lukas Müller</div>
+          <div style="font-size:.8125rem; color:var(--accent); font-weight:600;">Tech & Entwicklung</div>
+        </div>
+      </div>
+      <div class="team-card fade-up">
+        <div style="aspect-ratio:1; background:linear-gradient(135deg,#EEE8DF,#D4C5B0); display:flex; align-items:center; justify-content:center; font-size:3rem; font-weight:800; color:rgba(139,111,71,.6);">SR</div>
+        <div style="padding:1.25rem;">
+          <div style="font-weight:700; margin-bottom:.125rem;">Sara Reichmuth</div>
+          <div style="font-size:.8125rem; color:var(--accent); font-weight:600;">Content & Community</div>
+        </div>
+      </div>
+      <div class="team-card fade-up">
+        <div style="aspect-ratio:1; background:linear-gradient(135deg,#4A4440,#2C2A27); display:flex; align-items:center; justify-content:center; font-size:3rem; font-weight:800; color:rgba(255,255,255,.3);">TH</div>
+        <div style="padding:1.25rem;">
+          <div style="font-weight:700; margin-bottom:.125rem;">Thomas Hug</div>
+          <div style="font-size:.8125rem; color:var(--accent); font-weight:600;">Sales & Partnerschaften</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3rem;">
+      <div class="section-label" style="justify-content:center;">Partner & Kooperationen</div>
+      <h2 class="display-sm fade-up">Wir sind nicht allein.</h2>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;" class="fade-in">
+      <div class="partner-logo">SUISA</div>
+      <div class="partner-logo">Innerschweizer Volksmusik</div>
+      <div class="partner-logo">Musikschule Luzern</div>
+      <div class="partner-logo">Folklore Schweiz</div>
+      <div class="partner-logo">Schweizerische Radio- und Fernsehgesellschaft</div>
+      <div class="partner-logo">Pro Helvetia</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:var(--bg-dark); padding:clamp(6rem,12vw,12rem) 0; text-align:center; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1920&q=80') center/cover; opacity:.1;"></div>
+  <div class="container" style="position:relative; z-index:2;">
+    <h2 class="display-lg text-inv fade-up" style="max-width:700px; margin:0 auto 1.5rem;">Sei von Anfang an dabei.</h2>
+    <p class="body-lg fade-up" style="color:rgba(255,255,255,.5); max-width:460px; margin:0 auto 2.5rem; transition-delay:.1s;">Die ersten Mitglieder gestalten LAEMU mit. Deine Ideen, dein Feedback, deine Energie sind gefragt.</p>
+    <div class="flex-center gap-2 flex-wrap fade-up" style="transition-delay:.2s;">
+      <a href="member-community.html" class="btn btn-white btn-lg">Jetzt beitreten</a>
+      <a href="contact.html" class="btn btn-ghost btn-lg">Kontakt aufnehmen</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">LA<span>E</span>MU</div>
+        <div class="footer__tagline">Am Puls der Ländlermusik.</div>
+        <div class="social-links" style="margin-top:1.75rem;">
+          <a href="#" class="social-link">📷</a>
+          <a href="#" class="social-link">📘</a>
+          <a href="#" class="social-link">▶️</a>
+          <a href="#" class="social-link">🎵</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__heading">Plattform</div>
+        <ul class="footer__links">
+          <li><a href="community.html" class="footer__link">Community</a></li>
+          <li><a href="academy.html" class="footer__link">Academy</a></li>
+          <li><a href="events.html" class="footer__link">Events</a></li>
+          <li><a href="formations.html" class="footer__link">Formationen</a></li>
+          <li><a href="shop.html" class="footer__link">Shop</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__heading">LAEMU</div>
+        <ul class="footer__links">
+          <li><a href="mission.html" class="footer__link">Mission</a></li>
+          <li><a href="contact.html" class="footer__link">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__heading">Rechtliches</div>
+        <ul class="footer__links">
+          <li><a href="#" class="footer__link">Datenschutz</a></li>
+          <li><a href="#" class="footer__link">AGB</a></li>
+          <li><a href="#" class="footer__link">Impressum</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 LAEMU. Alle Rechte vorbehalten.</span>
+      <span>Made with ❤️ für die Schweizer Volksmusik</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

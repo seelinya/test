@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community — Mitgliederbereich — LAEMU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    body { background:var(--bg-warm); }
+    .member-nav {
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      height:var(--nav-h);
+      background:rgba(247,242,236,.95);
+      backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center;
+    }
+    .feed-input {
+      display:flex; align-items:center; gap:1rem;
+      background:var(--bg); border-radius:var(--r-xl);
+      padding:1rem 1.5rem;
+      border:1.5px solid var(--border);
+      cursor:pointer;
+      transition:border-color var(--t);
+      margin-bottom:1.5rem;
+    }
+    .feed-input:hover { border-color:var(--accent); }
+    .feed-input__avatar {
+      width:2.5rem; height:2.5rem; border-radius:50%;
+      background:linear-gradient(135deg,var(--accent-warm),var(--accent-l));
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:.875rem; color:var(--accent-deep);
+      flex-shrink:0;
+    }
+    .feed-input__text { color:var(--text-muted); font-size:.9375rem; }
+
+    .story-ring {
+      width:4rem; height:4rem; border-radius:50%;
+      padding:2px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-l));
+      flex-shrink:0; cursor:pointer;
+    }
+    .story-inner {
+      width:100%; height:100%; border-radius:50%;
+      background:var(--bg-warm);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:.875rem; color:var(--accent-deep);
+      border:2px solid var(--bg-warm);
+    }
+
+    .feed-post {
+      background:var(--bg);
+      border-radius:var(--r-xl);
+      overflow:hidden;
+      margin-bottom:1.25rem;
+    }
+    .feed-post__header {
+      display:flex; align-items:center; gap:.875rem;
+      padding:1.25rem 1.5rem 0;
+    }
+    .feed-post__avatar {
+      width:2.75rem; height:2.75rem; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:.875rem; flex-shrink:0;
+    }
+    .feed-post__body { padding:1rem 1.5rem; }
+    .feed-post__media {
+      width:100%; background:var(--bg-warm);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .feed-post__actions {
+      display:flex; gap:1.5rem; padding:.875rem 1.5rem;
+      border-top:1px solid var(--border);
+    }
+    .feed-action {
+      display:flex; align-items:center; gap:.375rem;
+      font-size:.875rem; font-weight:600; color:var(--text-muted);
+      cursor:pointer; transition:color var(--t); background:none; border:none;
+      font-family:inherit;
+    }
+    .feed-action:hover { color:var(--accent); }
+    .feed-action.liked { color:crimson; }
+
+    .suggestion-card {
+      display:flex; align-items:center; gap:.875rem;
+      padding:.875rem 1.25rem;
+      background:var(--bg); border-radius:var(--r-lg);
+      transition:background var(--t);
+    }
+    .suggestion-card:hover { background:var(--bg-warm); }
+    .suggestion-avatar {
+      width:2.5rem; height:2.5rem; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:.875rem; flex-shrink:0;
+    }
+
+    .widget {
+      background:var(--bg); border-radius:var(--r-xl); padding:1.5rem;
+      margin-bottom:1.25rem;
+    }
+    .widget__title {
+      font-size:.6875rem; font-weight:700; letter-spacing:.12em;
+      text-transform:uppercase; color:var(--text-muted);
+      margin-bottom:1.125rem;
+    }
+
+    .event-mini {
+      display:flex; gap:.875rem; align-items:center;
+      padding:.75rem 0; border-bottom:1px solid var(--border);
+    }
+    .event-mini:last-child { border-bottom:none; }
+    .event-mini__date {
+      text-align:center; background:var(--bg-warm); border-radius:var(--r-sm);
+      padding:.375rem .5rem; min-width:2.75rem;
+    }
+    .event-mini__day { font-size:1.125rem; font-weight:900; letter-spacing:-.03em; line-height:1; }
+    .event-mini__month { font-size:.5625rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); }
+
+    .streak-display {
+      text-align:center; padding:1rem;
+      background:linear-gradient(135deg,var(--accent),var(--accent-deep));
+      border-radius:var(--r-lg); color:#fff; margin-bottom:1rem;
+    }
+    .streak-num { font-size:2.5rem; font-weight:900; letter-spacing:-.04em; line-height:1; }
+  </style>
+</head>
+<body>
+
+<!-- MEMBER NAV -->
+<nav class="member-nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">LA<span>E</span>MU</a>
+    <div style="display:flex; align-items:center; gap:1.5rem; margin-left:2rem;">
+      <span style="font-size:.6875rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); background:var(--bg-warm); padding:.25rem .75rem; border-radius:var(--r-f);">Community</span>
+    </div>
+    <div style="flex:1; max-width:360px; margin:0 2rem;">
+      <input type="search" placeholder="Suche in der Community…" class="form-input" style="padding:.5rem 1rem; font-size:.875rem;">
+    </div>
+    <div style="display:flex; align-items:center; gap:1.25rem; margin-left:auto;">
+      <a href="member-academy.html" style="font-size:.8125rem; font-weight:600; color:var(--text-muted);">Academy</a>
+      <button style="position:relative; background:none; border:none; cursor:pointer; font-size:1.25rem;" title="Benachrichtigungen">🔔<span style="position:absolute; top:-2px; right:-2px; width:8px; height:8px; background:var(--accent); border-radius:50%;"></span></button>
+      <div style="width:2.25rem; height:2.25rem; border-radius:50%; background:linear-gradient(135deg,var(--accent-warm),var(--accent-l)); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.75rem; color:var(--accent-deep); cursor:pointer;">DU</div>
+      <button class="nav__hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MEMBER LAYOUT -->
+<div class="member-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div style="display:flex; align-items:center; gap:.875rem; padding:.75rem 0; margin-bottom:1.5rem; border-bottom:1px solid var(--border);">
+      <div style="width:3rem; height:3rem; border-radius:50%; background:linear-gradient(135deg,var(--accent-warm),var(--accent-l)); display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--accent-deep);">DU</div>
+      <div>
+        <div style="font-weight:700; font-size:.9375rem;">Dein Profil</div>
+        <div style="font-size:.75rem; color:var(--text-muted);">@deinbenutzername</div>
+      </div>
+    </div>
+    <nav class="sidebar__nav">
+      <a href="#" class="sidebar__link active">
+        <span>🏠</span> Feed
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>🔍</span> Entdecken
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>🔔</span> Benachrichtigungen
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>💬</span> Nachrichten
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>👤</span> Mein Profil
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>👥</span> Gruppen
+      </a>
+      <a href="#" class="sidebar__link">
+        <span>🏆</span> Challenges
+      </a>
+      <a href="events.html" class="sidebar__link">
+        <span>📅</span> Events
+      </a>
+      <a href="formations.html" class="sidebar__link">
+        <span>🎻</span> Formationen
+      </a>
+      <a href="member-academy.html" class="sidebar__link">
+        <span>🎓</span> Academy
+      </a>
+      <a href="shop.html" class="sidebar__link">
+        <span>🛍️</span> Shop
+      </a>
+    </nav>
+    <div style="margin-top:auto; padding-top:1.5rem; border-top:1px solid var(--border);">
+      <a href="index.html" class="sidebar__link"><span>⚙️</span> Einstellungen</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="member-content">
+    <!-- Stories -->
+    <div style="display:flex; gap:1rem; overflow-x:auto; padding:.25rem 0 1.5rem; scrollbar-width:none; -webkit-overflow-scrolling:touch;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:.5rem; flex-shrink:0; cursor:pointer;">
+        <div class="story-ring"><div class="story-inner" style="background:linear-gradient(135deg,var(--accent),var(--accent-deep)); color:#fff; font-size:1.25rem;">+</div></div>
+        <span style="font-size:.6875rem; color:var(--text-muted); font-weight:600;">Story</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:.5rem; flex-shrink:0; cursor:pointer;">
+        <div class="story-ring"><div class="story-inner">MH</div></div>
+        <span style="font-size:.6875rem; color:var(--text-muted); font-weight:600;">Maria</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:.5rem; flex-shrink:0; cursor:pointer;">
+        <div class="story-ring"><div class="story-inner" style="background:linear-gradient(135deg,#2C2A27,#4A4440); color:rgba(255,255,255,.6);">TZ</div></div>
+        <span style="font-size:.6875rem; color:var(--text-muted); font-weight:600;">Trio Z.</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:.5rem; flex-shrink:0; cursor:pointer;">
+        <div class="story-ring"><div class="story-inner" style="background:linear-gradient(135deg,#C4A882,#8B6F47); color:rgba(255,255,255,.7);">LB</div></div>
+        <span style="font-size:.6875rem; color:var(--text-muted); font-weight:600;">Lena</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:.5rem; flex-shrink:0; cursor:pointer;">
+        <div class="story-ring"><div class="story-inner" style="background:linear-gradient(135deg,#D4C5B0,#C4A882); color:var(--accent-deep);">RF</div></div>
+        <span style="font-size:.6875rem; color:var(--text-muted); font-weight:600;">Rolf</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:.5rem; flex-shrink:0; cursor:pointer;">
+        <div class="story-ring"><div class="story-inner">KF</div></div>
+        <span style="font-size:.6875rem; color:var(--text-muted); font-weight:600;">Kapelle F.</span>
+      </div>
+    </div>
+
+    <!-- Post Input -->
+    <div class="feed-input" onclick="showToast('Post-Editor öffnet sich…')">
+      <div class="feed-input__avatar">DU</div>
+      <div class="feed-input__text">Was willst du teilen? Video, Foto, Fortschritt…</div>
+      <div style="display:flex; gap:.5rem; margin-left:auto;">
+        <span title="Video" style="cursor:pointer;">📹</span>
+        <span title="Foto" style="cursor:pointer;">📷</span>
+        <span title="Noten" style="cursor:pointer;">🎼</span>
+      </div>
+    </div>
+
+    <!-- Posts -->
+    <div class="feed-post">
+      <div class="feed-post__header">
+        <div class="feed-post__avatar" style="background:linear-gradient(135deg,var(--accent-warm),var(--accent-l)); color:var(--accent-deep);">MH</div>
+        <div style="flex:1;">
+          <div style="font-weight:700; font-size:.9375rem;">Maria Häfliger</div>
+          <div style="font-size:.75rem; color:var(--text-muted);">Schwyzerörgeli · Innerschweiz · vor 2h</div>
+        </div>
+        <button style="background:none; border:none; cursor:pointer; font-size:.875rem; color:var(--text-muted);">···</button>
+      </div>
+      <div class="feed-post__body">
+        <p style="font-size:.9375rem; line-height:1.65;">Heute zum ersten Mal das neue Stück vollständig durchgespielt — ohne Fehler! 🎉 Nach 3 Wochen täglichem Üben. Ein kleiner Schritt, aber er fühlt sich riesig an. Danke an alle, die mir Mut gemacht haben! #Schwyzerörgeli #Fortschritt #LAEMU</p>
+      </div>
+      <div class="feed-post__media" style="height:280px; background:linear-gradient(135deg,#EEE8DF,#C4A882); font-size:6rem;">🎵</div>
+      <div style="padding:.875rem 1.5rem; font-size:.8125rem; color:var(--text-muted);">❤️ 47 Likes · 12 Kommentare</div>
+      <div class="feed-post__actions">
+        <button class="feed-action" onclick="this.classList.toggle('liked'); this.querySelector('span').textContent = this.classList.contains('liked') ? '48' : '47';">❤️ <span>47</span></button>
+        <button class="feed-action">💬 Kommentieren</button>
+        <button class="feed-action">↗️ Teilen</button>
+        <button class="feed-action" style="margin-left:auto;">🔖 Speichern</button>
+      </div>
+    </div>
+
+    <div class="feed-post">
+      <div class="feed-post__header">
+        <div class="feed-post__avatar" style="background:linear-gradient(135deg,#2C2A27,#4A4440); color:rgba(255,255,255,.6);">TZ</div>
+        <div style="flex:1;">
+          <div style="font-weight:700; font-size:.9375rem;">Trio Zwyssig</div>
+          <div style="font-size:.75rem; color:var(--text-muted);">Formation · Schwyz · vor 5h</div>
+        </div>
+        <button style="background:none; border:none; cursor:pointer; font-size:.875rem; color:var(--text-muted);">···</button>
+      </div>
+      <div class="feed-post__body">
+        <p style="font-size:.9375rem; line-height:1.65;">Gestern Abend — ein Konzert, das wir nie vergessen werden. Die Energie im Saal war unbeschreiblich. Danke an alle 380 Besucherinnen und Besucher! Ihr seid der Grund, warum wir Musik machen. 🙏 #LiveMusik #Ländlermusik #LAEMU</p>
+      </div>
+      <div class="feed-post__media" style="height:320px; background:linear-gradient(135deg,#1A1814,#3A3530); font-size:8rem; opacity:.8;">🎪</div>
+      <div style="padding:.875rem 1.5rem; font-size:.8125rem; color:var(--text-muted);">❤️ 134 Likes · 28 Kommentare</div>
+      <div class="feed-post__actions">
+        <button class="feed-action" onclick="this.classList.toggle('liked')">❤️ 134</button>
+        <button class="feed-action">💬 Kommentieren</button>
+        <button class="feed-action">↗️ Teilen</button>
+        <button class="feed-action" style="margin-left:auto;">🔖 Speichern</button>
+      </div>
+    </div>
+
+    <!-- Challenge Post -->
+    <div class="feed-post" style="border:1.5px solid var(--accent-warm);">
+      <div style="background:linear-gradient(135deg,var(--accent),var(--accent-deep)); padding:1rem 1.5rem; color:#fff; display:flex; align-items:center; gap:.875rem;">
+        <span style="font-size:1.5rem;">🏆</span>
+        <div>
+          <div style="font-size:.625rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; opacity:.7;">Aktive Challenge</div>
+          <div style="font-weight:800; font-size:1rem;">#MaiChallenge — Noch 14 Tage</div>
+        </div>
+      </div>
+      <div class="feed-post__body">
+        <p style="font-size:.9375rem; line-height:1.65;">Spiele einen klassischen Ländler — auf deine ganz eigene Art. Nimm ein Video auf, poste es mit #MaiChallenge und inspiriere die Community. Die besten Videos werden von unserer Jury bewertet.</p>
+        <div style="margin-top:1.25rem; display:flex; gap:.875rem; flex-wrap:wrap;">
+          <button class="btn btn-accent btn-sm" onclick="showToast('Challenge-Upload öffnet…')">🎬 Video hochladen</button>
+          <button class="btn btn-outline btn-sm">Alle Beiträge (287) →</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- RIGHT SIDEBAR (desktop) -->
+  <aside style="width:300px; flex-shrink:0; padding:2.5rem 1.5rem; display:flex; flex-direction:column; gap:0;" class="sidebar" style="border-left:1px solid var(--border); border-right:none; left:auto; right:0; position:sticky; top:var(--nav-h);">
+
+    <!-- Streak -->
+    <div class="widget">
+      <div class="widget__title">Dein Learning Streak</div>
+      <div class="streak-display">
+        <div style="font-size:1.5rem; margin-bottom:.25rem;">🔥</div>
+        <div class="streak-num">7</div>
+        <div style="font-size:.75rem; opacity:.8; margin-top:.25rem;">Tage in Folge</div>
+      </div>
+      <a href="member-academy.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;">Academy öffnen</a>
+    </div>
+
+    <!-- Upcoming Events -->
+    <div class="widget">
+      <div class="widget__title">Nächste Events</div>
+      <div class="event-mini">
+        <div class="event-mini__date"><div class="event-mini__day">17</div><div class="event-mini__month">Mai</div></div>
+        <div><div style="font-weight:700; font-size:.875rem;">LAEMU Community Abend</div><div style="font-size:.75rem; color:var(--text-muted);">📍 Luzern</div></div>
+      </div>
+      <div class="event-mini">
+        <div class="event-mini__date"><div class="event-mini__day">07</div><div class="event-mini__month">Jun</div></div>
+        <div><div style="font-weight:700; font-size:.875rem;">Lernwochenende Örgeli</div><div style="font-size:.75rem; color:var(--text-muted);">📍 Engelberg</div></div>
+      </div>
+      <a href="events.html" class="btn btn-outline btn-sm w-full" style="justify-content:center; margin-top:1rem;">Alle Events</a>
+    </div>
+
+    <!-- Suggestions -->
+    <div class="widget">
+      <div class="widget__title">Entdecken</div>
+      <div style="display:flex; flex-direction:column; gap:.5rem;">
+        <div class="suggestion-card">
+          <div class="suggestion-avatar" style="background:linear-gradient(135deg,var(--accent-warm),var(--accent-l)); color:var(--accent-deep);">RF</div>
+          <div style="flex:1;"><div style="font-weight:700; font-size:.875rem;">Rolf Frei</div><div style="font-size:.75rem; color:var(--text-muted);">Handorgel · Zug</div></div>
+          <button class="btn btn-outline btn-sm" onclick="this.textContent='✓ Folgst'">Folgen</button>
+        </div>
+        <div class="suggestion-card">
+          <div class="suggestion-avatar" style="background:linear-gradient(135deg,#C4A882,#8B6F47); color:rgba(255,255,255,.7);">KF</div>
+          <div style="flex:1;"><div style="font-weight:700; font-size:.875rem;">Kapelle Feuerbach</div><div style="font-size:.75rem; color:var(--text-muted);">Formation · Luzern</div></div>
+          <button class="btn btn-outline btn-sm" onclick="this.textContent='✓ Folgst'">Folgen</button>
+        </div>
+        <div class="suggestion-card">
+          <div class="suggestion-avatar" style="background:linear-gradient(135deg,#2C2A27,#4A4440); color:rgba(255,255,255,.5);">ML</div>
+          <div style="flex:1;"><div style="font-weight:700; font-size:.875rem;">Maria Lustenberger</div><div style="font-size:.75rem; color:var(--text-muted);">Lehrerin · Örgeli</div></div>
+          <button class="btn btn-outline btn-sm" onclick="this.textContent='✓ Folgst'">Folgen</button>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

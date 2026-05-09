@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — LAEMU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .shop-hero {
+      padding-top: calc(var(--nav-h) + 5rem);
+      padding-bottom: 5rem;
+      background: var(--bg-dark);
+      color: var(--text-inv);
+      position: relative;
+      overflow: hidden;
+    }
+    .shop-hero::before {
+      content:'';
+      position:absolute; inset:0;
+      background:linear-gradient(135deg,#5A4530 0%,#1A1814 100%);
+      opacity:.95;
+    }
+    .shop-hero__graphic {
+      position:absolute; right:-5%; top:50%; transform:translateY(-50%);
+      font-size:clamp(8rem,20vw,18rem);
+      opacity:.06; line-height:1;
+      pointer-events:none;
+    }
+    .product-big {
+      border-radius:var(--r-xl);
+      overflow:hidden;
+      position:relative;
+      cursor:pointer;
+    }
+    .product-big__img {
+      width:100%; aspect-ratio:3/4; object-fit:cover;
+      transition:transform .5s var(--ease);
+    }
+    .product-big:hover .product-big__img { transform:scale(1.04); }
+    .product-big__overlay {
+      position:absolute; bottom:0; left:0; right:0;
+      padding:2rem;
+      background:linear-gradient(to top,rgba(10,9,8,.85) 0%,transparent 60%);
+      color:#fff;
+    }
+    .product-big__price { font-size:1.5rem; font-weight:900; letter-spacing:-.03em; }
+
+    .review-card {
+      background:var(--bg-card); border-radius:var(--r-xl); padding:2rem;
+    }
+    .stars { color:var(--accent); font-size:1rem; letter-spacing:.1em; }
+
+    .lifestyle-img {
+      border-radius:var(--r-xl); overflow:hidden;
+      aspect-ratio:4/3;
+    }
+    .lifestyle-img img { width:100%; height:100%; object-fit:cover; }
+
+    .cart-btn {
+      position:fixed; bottom:2rem; right:2rem; z-index:800;
+      background:var(--text); color:var(--bg);
+      width:3.5rem; height:3.5rem; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.25rem;
+      box-shadow:var(--shadow-lg);
+      cursor:pointer;
+      transition:background var(--t), transform var(--t);
+    }
+    .cart-btn:hover { background:var(--accent); transform:scale(1.1); }
+    .cart-badge {
+      position:absolute; top:-4px; right:-4px;
+      width:20px; height:20px; border-radius:50%;
+      background:var(--accent); color:#fff;
+      font-size:.625rem; font-weight:700;
+      display:flex; align-items:center; justify-content:center;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav dark" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">LA<span>E</span>MU</a>
+    <ul class="nav__links">
+      <li><a href="mission.html" class="nav__link">Mission</a></li>
+      <li><a href="community.html" class="nav__link">Community</a></li>
+      <li><a href="academy.html" class="nav__link">Academy</a></li>
+      <li><a href="events.html" class="nav__link">Events</a></li>
+      <li><a href="formations.html" class="nav__link">Formationen</a></li>
+      <li><a href="shop.html" class="nav__link active">Shop</a></li>
+      <li><a href="contact.html" class="nav__link">Kontakt</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a href="member-community.html" class="nav__cta">Mitglied werden</a>
+      <button class="nav__hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="mission.html" class="nav__mobile-link">Mission</a>
+  <a href="community.html" class="nav__mobile-link">Community</a>
+  <a href="academy.html" class="nav__mobile-link">Academy</a>
+  <a href="events.html" class="nav__mobile-link">Events</a>
+  <a href="formations.html" class="nav__mobile-link">Formationen</a>
+  <a href="shop.html" class="nav__mobile-link">Shop</a>
+  <a href="contact.html" class="nav__mobile-link">Kontakt</a>
+  <a href="member-community.html" class="btn btn-primary btn-lg mt-4">Mitglied werden</a>
+</div>
+
+<!-- HERO -->
+<section class="shop-hero">
+  <div class="shop-hero__graphic">🧥</div>
+  <div class="container" style="position:relative; z-index:2;">
+    <div class="section-label" style="color:var(--accent-l); margin-bottom:1.5rem;">LAEMU Shop</div>
+    <h1 class="display-xl fade-up" style="max-width:700px; margin-bottom:1.25rem;">Trage die Bewegung.</h1>
+    <p class="body-lg fade-up" style="color:rgba(255,255,255,.6); max-width:480px; margin-bottom:2.5rem; transition-delay:.1s;">
+      Schweizer Volksmusik-Kultur als Lifestyle. Premiumprodukte, die zu dir passen — aus der Szene, für die Szene.
+    </p>
+    <div class="flex gap-2 flex-wrap fade-up" style="transition-delay:.2s;">
+      <a href="#produkte" class="btn btn-white btn-lg">Produkte entdecken</a>
+      <a href="#formation-merch" class="btn btn-ghost btn-lg">Formation Merch</a>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER -->
+<div style="background:var(--bg-warm); border-bottom:1px solid var(--border); padding:1.125rem 0; position:sticky; top:var(--nav-h); z-index:90;">
+  <div class="container">
+    <div class="filters">
+      <button class="filter-btn active">Alle</button>
+      <button class="filter-btn">LAEMU Basics</button>
+      <button class="filter-btn">Formation Merch</button>
+      <button class="filter-btn">Musik & Noten</button>
+      <button class="filter-btn">Accessoires</button>
+      <button class="filter-btn">Lifestyle</button>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED PRODUCTS -->
+<section class="section" id="produkte">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Highlights</div>
+      <h2 class="display-md fade-up">LAEMU Basics.</h2>
+      <p class="body-lg text-muted fade-up" style="max-width:480px; margin:.75rem auto 0; transition-delay:.1s;">Sorgfältig gestaltete Produkte mit Schweizer Volksmusik-Seele.</p>
+    </div>
+
+    <!-- Big product feature -->
+    <div class="grid-2 stagger" style="gap:1.5rem; margin-bottom:1.5rem;">
+      <div class="product-big fade-up">
+        <div style="width:100%; aspect-ratio:3/4; background:linear-gradient(135deg,#1A1814 0%,#3A3530 100%); display:flex; align-items:center; justify-content:center; font-size:10rem;">🧥</div>
+        <div class="product-big__overlay">
+          <div class="tag tag-accent" style="margin-bottom:.75rem;">Bestseller</div>
+          <div style="font-size:1.375rem; font-weight:800; margin-bottom:.25rem;">LAEMU Essential Hoodie</div>
+          <div style="opacity:.65; font-size:.875rem; margin-bottom:.75rem;">Schwarz · Warm Beige · Anthrazit</div>
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div class="product-big__price">CHF 89</div>
+            <button class="btn btn-white btn-sm" onclick="showToast('In den Warenkorb gelegt ✓')">In den Korb</button>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+        <div class="product-big fade-up" style="transition-delay:.1s;">
+          <div style="width:100%; aspect-ratio:1; background:linear-gradient(135deg,#8B6F47,#5A4530); display:flex;align-items:center;justify-content:center;font-size:5rem;">👕</div>
+          <div class="product-big__overlay">
+            <div style="font-weight:800; font-size:1rem;">LAEMU T-Shirt</div>
+            <div class="product-big__price" style="font-size:1.125rem;">CHF 49</div>
+          </div>
+        </div>
+        <div class="product-big fade-up" style="transition-delay:.15s;">
+          <div style="width:100%; aspect-ratio:1; background:linear-gradient(135deg,#2C2A27,#4A4440); display:flex;align-items:center;justify-content:center;font-size:5rem;">🧢</div>
+          <div class="product-big__overlay">
+            <div style="font-weight:800; font-size:1rem;">LAEMU Cap</div>
+            <div class="product-big__price" style="font-size:1.125rem;">CHF 39</div>
+          </div>
+        </div>
+        <div class="product-big fade-up" style="transition-delay:.2s;">
+          <div style="width:100%; aspect-ratio:1; background:linear-gradient(135deg,#F0EAE0,#D4C5B0); display:flex;align-items:center;justify-content:center;font-size:5rem;">📜</div>
+          <div class="product-big__overlay">
+            <div style="font-weight:800; font-size:1rem;">Art Poster A2</div>
+            <div class="product-big__price" style="font-size:1.125rem;">CHF 29</div>
+          </div>
+        </div>
+        <div class="product-big fade-up" style="transition-delay:.25s;">
+          <div style="width:100%; aspect-ratio:1; background:linear-gradient(135deg,#C4A882,#8B6F47); display:flex;align-items:center;justify-content:center;font-size:5rem;">✨</div>
+          <div class="product-big__overlay">
+            <div style="font-weight:800; font-size:1rem;">Sticker Set (6er)</div>
+            <div class="product-big__price" style="font-size:1.125rem;">CHF 15</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL PRODUCTS -->
+<section class="section-sm bg-warm">
+  <div class="container">
+    <h2 class="display-sm fade-up" style="margin-bottom:2rem;">Alle LAEMU Produkte.</h2>
+    <div class="grid-4 stagger">
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#1A1814,#3A3530);display:flex;align-items:center;justify-content:center;font-size:4rem;">🧥</div>
+        <div class="product-card__body">
+          <div class="product-card__name">LAEMU Hoodie</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">S / M / L / XL / XXL</div>
+          <div class="product-card__price">CHF 89</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#8B6F47,#5A4530);display:flex;align-items:center;justify-content:center;font-size:4rem;">👕</div>
+        <div class="product-card__body">
+          <div class="product-card__name">LAEMU T-Shirt</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">XS – XXL · 3 Farben</div>
+          <div class="product-card__price">CHF 49</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#2C2A27,#4A4440);display:flex;align-items:center;justify-content:center;font-size:4rem;">🧢</div>
+        <div class="product-card__body">
+          <div class="product-card__name">LAEMU 5-Panel Cap</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">One Size · 2 Farben</div>
+          <div class="product-card__price">CHF 39</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#D4C5B0,#C4A882);display:flex;align-items:center;justify-content:center;font-size:4rem;">📜</div>
+        <div class="product-card__body">
+          <div class="product-card__name">Art Poster «LAEMU»</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">A2 · Hochwertig gedruckt</div>
+          <div class="product-card__price">CHF 29</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#C4A882,#8B6F47);display:flex;align-items:center;justify-content:center;font-size:4rem;">✨</div>
+        <div class="product-card__body">
+          <div class="product-card__name">Sticker Set</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">6 Sticker · Vinyl</div>
+          <div class="product-card__price">CHF 15</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#5A4530,#8B6F47);display:flex;align-items:center;justify-content:center;font-size:4rem;">🎒</div>
+        <div class="product-card__body">
+          <div class="product-card__name">LAEMU Tote Bag</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">Organic Cotton</div>
+          <div class="product-card__price">CHF 28</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#EEE8DF,#D4C5B0);display:flex;align-items:center;justify-content:center;font-size:4rem;">📓</div>
+        <div class="product-card__body">
+          <div class="product-card__name">Notenblock</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">A5 · Premium Papier</div>
+          <div class="product-card__price">CHF 18</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#1A1814,#2C2A27);display:flex;align-items:center;justify-content:center;font-size:4rem;">🎵</div>
+        <div class="product-card__body">
+          <div class="product-card__name">Noten-Bundle Digital</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">50 Stücke · PDF Download</div>
+          <div class="product-card__price">CHF 35</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION MERCH -->
+<section class="section" id="formation-merch">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Von Formationen</div>
+      <h2 class="display-md fade-up">Formation Merch & CDs.</h2>
+      <p class="body-lg text-muted fade-up" style="max-width:480px; margin:.75rem auto 0; transition-delay:.1s;">Unterstütze deine Lieblingsformation direkt — mit offiziellen Produkten über LAEMU.</p>
+    </div>
+    <div class="grid-4 stagger">
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#2C2A27,#1A1814);display:flex;align-items:center;justify-content:center;font-size:4rem;">💿</div>
+        <div class="product-card__body">
+          <div class="product-card__name">CD Feuerbach Vol. 3</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">Ländlerkapelle Feuerbach</div>
+          <div class="product-card__price">CHF 25</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#8B6F47,#5A4530);display:flex;align-items:center;justify-content:center;font-size:4rem;">👕</div>
+        <div class="product-card__body">
+          <div class="product-card__name">T-Shirt Trio Sonnenberg</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">Trio Sonnenberg</div>
+          <div class="product-card__price">CHF 38</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#C4A882,#8B6F47);display:flex;align-items:center;justify-content:center;font-size:4rem;">💿</div>
+        <div class="product-card__body">
+          <div class="product-card__name">CD «Alpenklang»</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">Quartett Alpenrosen</div>
+          <div class="product-card__price">CHF 22</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#D4C5B0,#EEE8DF);display:flex;align-items:center;justify-content:center;font-size:4rem;">📜</div>
+        <div class="product-card__body">
+          <div class="product-card__name">Poster Kapelle Heidiland</div>
+          <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:.375rem;">Kapelle Heidiland</div>
+          <div class="product-card__price">CHF 20</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFESTYLE SECTION -->
+<div class="parallax-section" style="min-height:60vh;">
+  <div class="parallax-bg" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1920&q=80');"></div>
+  <div class="parallax-overlay"></div>
+  <div class="container" style="position:relative; z-index:2; text-align:center; color:#fff;">
+    <div class="script fade-in" style="color:var(--accent-l); font-size:2.5rem; margin-bottom:1rem;">Schweizer Volksmusik als Lifestyle</div>
+    <h2 class="display-lg fade-up" style="max-width:700px; margin:0 auto 1.5rem; transition-delay:.1s;">Trage es mit Stolz.</h2>
+    <a href="#produkte" class="btn btn-white btn-lg fade-up" style="transition-delay:.2s;">Jetzt shoppen</a>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Kundenstimmen</div>
+      <h2 class="display-md fade-up">Was unsere Kunden sagen.</h2>
+    </div>
+    <div class="grid-3 stagger">
+      <div class="review-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial__quote" style="margin:1rem 0;">"Der Hoodie ist unglaublich weich und das Design genial. Ich trage ihn jeden Tag — und werde ständig darauf angesprochen."</p>
+        <div style="font-weight:700; font-size:.9375rem;">Anna R. · Luzern</div>
+      </div>
+      <div class="review-card fade-up" style="transition-delay:.1s;">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial__quote" style="margin:1rem 0;">"Perfekte Qualität. Das T-Shirt passt hervorragend und der Druck ist sauber. Schnelle Lieferung. Gerne wieder!"</p>
+        <div style="font-weight:700; font-size:.9375rem;">Markus T. · Bern</div>
+      </div>
+      <div class="review-card fade-up" style="transition-delay:.2s;">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial__quote" style="margin:1rem 0;">"Das Notendownload-Bundle ist Gold wert. 50 Stücke in top Qualität. Endlich alles digital verfügbar!"</p>
+        <div style="font-weight:700; font-size:.9375rem;">Franziska K. · Schwyz</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELL CTA -->
+<section style="background:var(--bg-warm); padding:clamp(4rem,8vw,8rem) 0; text-align:center;">
+  <div class="container container-sm">
+    <div class="section-label" style="justify-content:center;">Für Formationen</div>
+    <h2 class="display-md fade-up" style="margin-bottom:1rem;">Verkaufe deine Produkte über LAEMU.</h2>
+    <p class="body-lg text-muted fade-up" style="max-width:480px; margin:0 auto 2.5rem; transition-delay:.1s;">
+      Du bist eine Formation und willst CDs, Merch oder Noten über LAEMU verkaufen? Melde dich — wir helfen dir beim Setup.
+    </p>
+    <a href="contact.html" class="btn btn-primary btn-lg fade-up" style="transition-delay:.2s;">Jetzt anfragen</a>
+  </div>
+</section>
+
+<!-- Floating cart -->
+<div class="cart-btn" onclick="showToast('Warenkorb: 0 Artikel')">
+  🛒
+  <div class="cart-badge">0</div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div><div class="footer__logo">LA<span>E</span>MU</div><div class="footer__tagline">Am Puls der Ländlermusik.</div><div class="social-links" style="margin-top:1.75rem;"><a href="#" class="social-link">📷</a><a href="#" class="social-link">📘</a><a href="#" class="social-link">▶️</a><a href="#" class="social-link">🎵</a></div></div>
+      <div><div class="footer__heading">Plattform</div><ul class="footer__links"><li><a href="community.html" class="footer__link">Community</a></li><li><a href="academy.html" class="footer__link">Academy</a></li><li><a href="events.html" class="footer__link">Events</a></li><li><a href="formations.html" class="footer__link">Formationen</a></li><li><a href="shop.html" class="footer__link">Shop</a></li></ul></div>
+      <div><div class="footer__heading">LAEMU</div><ul class="footer__links"><li><a href="mission.html" class="footer__link">Mission</a></li><li><a href="contact.html" class="footer__link">Kontakt</a></li></ul></div>
+      <div><div class="footer__heading">Rechtliches</div><ul class="footer__links"><li><a href="#" class="footer__link">Datenschutz</a></li><li><a href="#" class="footer__link">AGB</a></li><li><a href="#" class="footer__link">Impressum</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>© 2025 LAEMU.</span><span>Made with ❤️ für die Schweizer Volksmusik</span></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

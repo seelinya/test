@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ländlerkapelle Feuerbach — LAEMU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .detail-hero {
+      min-height: 75vh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 4rem;
+      overflow: hidden;
+    }
+    .detail-hero__bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1920&q=80') center/cover;
+    }
+    .detail-hero__bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,7,6,.92) 0%, rgba(8,7,6,.45) 55%, rgba(8,7,6,.1) 100%);
+    }
+    .detail-hero__content { position: relative; z-index: 2; color: #fff; }
+
+    .info-card {
+      background: var(--bg-card);
+      border-radius: var(--r-xl);
+      padding: 2rem;
+    }
+    .info-row {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row__icon { font-size: 1.125rem; flex-shrink: 0; margin-top: .1rem; }
+    .info-row__label { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: .2rem; }
+    .info-row__value { font-size: .9375rem; font-weight: 600; }
+
+    .musician-card {
+      background: var(--bg-card);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      text-align: center;
+    }
+    .musician-avatar {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      background: linear-gradient(135deg, var(--accent-warm), var(--accent-l));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; font-weight: 800; color: rgba(255,255,255,.5);
+    }
+    .musician-card__body { padding: 1.5rem; }
+
+    .audio-sample {
+      background: var(--bg-card);
+      border-radius: var(--r-lg);
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+      cursor: pointer;
+      transition: background var(--t);
+    }
+    .audio-sample:hover { background: var(--bg-warm); }
+    .play-btn {
+      width: 2.75rem; height: 2.75rem;
+      border-radius: 50%;
+      background: var(--text);
+      color: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem;
+      flex-shrink: 0;
+      transition: background var(--t);
+    }
+    .audio-sample:hover .play-btn { background: var(--accent); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .gallery-item {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      aspect-ratio: 1;
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s var(--ease);
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    .social-post {
+      background: var(--bg-card);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      aspect-ratio: 1;
+      cursor: pointer;
+      position: relative;
+    }
+    .social-post__img { width: 100%; height: 100%; object-fit: cover; }
+    .social-post__overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,9,8,.4);
+      opacity: 0;
+      transition: opacity var(--t);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: .875rem; font-weight: 700;
+    }
+    .social-post:hover .social-post__overlay { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<nav class="nav dark" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">LA<span>E</span>MU</a>
+    <ul class="nav__links">
+      <li><a href="mission.html" class="nav__link">Mission</a></li>
+      <li><a href="community.html" class="nav__link">Community</a></li>
+      <li><a href="academy.html" class="nav__link">Academy</a></li>
+      <li><a href="events.html" class="nav__link">Events</a></li>
+      <li><a href="formations.html" class="nav__link active">Formationen</a></li>
+      <li><a href="shop.html" class="nav__link">Shop</a></li>
+      <li><a href="contact.html" class="nav__link">Kontakt</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a href="member-community.html" class="nav__cta">Mitglied werden</a>
+      <button class="nav__hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="mission.html" class="nav__mobile-link">Mission</a>
+  <a href="community.html" class="nav__mobile-link">Community</a>
+  <a href="academy.html" class="nav__mobile-link">Academy</a>
+  <a href="events.html" class="nav__mobile-link">Events</a>
+  <a href="formations.html" class="nav__mobile-link">Formationen</a>
+  <a href="shop.html" class="nav__mobile-link">Shop</a>
+  <a href="contact.html" class="nav__mobile-link">Kontakt</a>
+  <a href="member-community.html" class="btn btn-primary btn-lg mt-4">Mitglied werden</a>
+</div>
+
+<!-- HERO -->
+<section class="detail-hero">
+  <div class="detail-hero__bg"></div>
+  <div class="container">
+    <div class="detail-hero__content">
+      <a href="formations.html" style="display:inline-flex; align-items:center; gap:.5rem; font-size:.8125rem; font-weight:600; opacity:.6; margin-bottom:1.5rem; transition:opacity .2s;">← Alle Formationen</a>
+      <div class="script" style="color:var(--accent-l); font-size:1.75rem; margin-bottom:.5rem;">Seit 2001 auf den Bühnen der Schweiz</div>
+      <h1 class="display-lg" style="margin-bottom:1rem;">Ländlerkapelle<br>Feuerbach</h1>
+      <p style="font-size:1.125rem; opacity:.65; max-width:560px; line-height:1.6; margin-bottom:2rem;">
+        Fünfköpfige Kapelle aus der Innerschweiz. Leidenschaftliche Musik, die bewegt — für Konzerte, Tanzveranstaltungen und unvergessliche Feste.
+      </p>
+      <div style="display:flex; gap:.75rem; flex-wrap:wrap;">
+        <span class="tag tag-accent">Ländler</span>
+        <span class="tag" style="background:rgba(255,255,255,.12); color:#fff;">Schottisch</span>
+        <span class="tag" style="background:rgba(255,255,255,.12); color:#fff;">Walzer</span>
+        <span class="tag" style="background:rgba(255,255,255,.12); color:#fff;">Polka</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 340px; gap:3rem; align-items:start;">
+
+      <!-- LEFT COLUMN -->
+      <div>
+        <!-- About -->
+        <div style="margin-bottom:3.5rem;">
+          <div class="section-label">Über die Formation</div>
+          <h2 class="display-sm" style="margin-bottom:1rem;">Musik aus dem Herzen der Innerschweiz.</h2>
+          <p class="body-lg text-muted" style="margin-bottom:1rem;">
+            Die Ländlerkapelle Feuerbach wurde 2001 von fünf befreundeten Musikerinnen und Musikern aus Luzern gegründet — mit einer gemeinsamen Leidenschaft: Musik zu machen, die Menschen zusammenbringt und zum Tanzen bringt.
+          </p>
+          <p class="body-md text-muted" style="margin-bottom:1rem;">
+            Über 20 Jahre später ist die Kapelle eine feste Grösse in der Schweizer Ländlermusikszene. Mit über 500 gespielten Konzerten und Veranstaltungen hat die Kapelle ihren unverwechselbaren Sound entwickelt — warm, präzise und mit einer Energie, die keine Beine still lässt.
+          </p>
+          <p class="body-md text-muted">
+            Ob grosses Konzert, Tanzveranstaltung, Hochzeitsfeier oder privates Fest — die Kapelle Feuerbach bringt die richtige Stimmung mit.
+          </p>
+        </div>
+
+        <!-- Musicians -->
+        <div style="margin-bottom:3.5rem;">
+          <div class="section-label">Die Musikerinnen & Musiker</div>
+          <h2 class="display-sm" style="margin-bottom:2rem;">Fünf Menschen, eine Kapelle.</h2>
+          <div class="grid-3 stagger" style="gap:1.25rem;">
+            <div class="musician-card fade-up">
+              <div class="musician-avatar">HF</div>
+              <div class="musician-card__body">
+                <div style="font-weight:800; font-size:1rem; margin-bottom:.125rem;">Hans Feuerbach</div>
+                <div style="font-size:.8125rem; color:var(--accent); font-weight:600; margin-bottom:.625rem;">Handorgel · Leitung</div>
+                <p class="body-sm">Gründer und musikalischer Leiter. Seit Kindheit der Ländlermusik verschrieben.</p>
+              </div>
+            </div>
+            <div class="musician-card fade-up">
+              <div class="musician-avatar" style="background:linear-gradient(135deg,#C4A882,#8B6F47);">SR</div>
+              <div class="musician-card__body">
+                <div style="font-weight:800; font-size:1rem; margin-bottom:.125rem;">Silvia Renggli</div>
+                <div style="font-size:.8125rem; color:var(--accent); font-weight:600; margin-bottom:.625rem;">Schwyzerörgeli</div>
+                <p class="body-sm">Virtuosin mit Konzertdiplom. Seit 2003 festes Mitglied der Kapelle.</p>
+              </div>
+            </div>
+            <div class="musician-card fade-up">
+              <div class="musician-avatar" style="background:linear-gradient(135deg,#2C2A27,#4A4440);">PM</div>
+              <div class="musician-card__body">
+                <div style="font-weight:800; font-size:1rem; margin-bottom:.125rem;">Peter Müller</div>
+                <div style="font-size:.8125rem; color:var(--accent); font-weight:600; margin-bottom:.625rem;">Klarinette</div>
+                <p class="body-sm">Langjähriger Primär-Melodieleader. Bringt Jazz-Einflüsse in den Klang ein.</p>
+              </div>
+            </div>
+            <div class="musician-card fade-up">
+              <div class="musician-avatar" style="background:linear-gradient(135deg,#D4C5B0,#C4A882); color:var(--accent-deep);">LK</div>
+              <div class="musician-card__body">
+                <div style="font-weight:800; font-size:1rem; margin-bottom:.125rem;">Lisa Kälin</div>
+                <div style="font-size:.8125rem; color:var(--accent); font-weight:600; margin-bottom:.625rem;">Klavier / Piano</div>
+                <p class="body-sm">Musikalische Universaltalent. Arrangiert auch viele der Kapellenstücke.</p>
+              </div>
+            </div>
+            <div class="musician-card fade-up">
+              <div class="musician-avatar" style="background:linear-gradient(135deg,#EEE8DF,#D4C5B0); color:var(--accent);">TZ</div>
+              <div class="musician-card__body">
+                <div style="font-weight:800; font-size:1rem; margin-bottom:.125rem;">Thomas Zwyssig</div>
+                <div style="font-size:.8125rem; color:var(--accent); font-weight:600; margin-bottom:.625rem;">Bass</div>
+                <p class="body-sm">Das rhythmische Fundament. Sein Groove macht den Sound unverwechselbar.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audio Samples -->
+        <div style="margin-bottom:3.5rem;">
+          <div class="section-label">Klangproben</div>
+          <h2 class="display-sm" style="margin-bottom:1.5rem;">Hör rein.</h2>
+          <div style="display:flex; flex-direction:column; gap:.75rem;">
+            <div class="audio-sample">
+              <div class="play-btn">▶</div>
+              <div style="flex:1;">
+                <div style="font-weight:700; font-size:.9375rem;">Luzerner Ländler</div>
+                <div style="font-size:.8125rem; color:var(--text-muted);">3:24 · Live-Aufnahme 2024</div>
+              </div>
+              <div style="width:120px; height:32px; background:var(--bg-warm); border-radius:var(--r-f); overflow:hidden; position:relative;">
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:2px;">
+                  <div style="width:2px; height:60%; background:var(--accent); border-radius:2px;"></div>
+                  <div style="width:2px; height:90%; background:var(--accent); border-radius:2px;"></div>
+                  <div style="width:2px; height:40%; background:var(--accent); border-radius:2px;"></div>
+                  <div style="width:2px; height:75%; background:var(--accent); border-radius:2px;"></div>
+                  <div style="width:2px; height:55%; background:var(--accent); border-radius:2px;"></div>
+                  <div style="width:2px; height:85%; background:var(--accent); border-radius:2px;"></div>
+                  <div style="width:2px; height:45%; background:var(--accent); border-radius:2px;"></div>
+                  <div style="width:2px; height:70%; background:var(--accent); border-radius:2px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="audio-sample">
+              <div class="play-btn">▶</div>
+              <div style="flex:1;">
+                <div style="font-weight:700; font-size:.9375rem;">Alpschottisch</div>
+                <div style="font-size:.8125rem; color:var(--text-muted);">2:58 · Studioaufnahme</div>
+              </div>
+              <div style="width:120px; height:32px; background:var(--bg-warm); border-radius:var(--r-f); overflow:hidden; position:relative;">
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:2px;">
+                  <div style="width:2px; height:50%; background:var(--accent-l); border-radius:2px;"></div>
+                  <div style="width:2px; height:80%; background:var(--accent-l); border-radius:2px;"></div>
+                  <div style="width:2px; height:60%; background:var(--accent-l); border-radius:2px;"></div>
+                  <div style="width:2px; height:95%; background:var(--accent-l); border-radius:2px;"></div>
+                  <div style="width:2px; height:65%; background:var(--accent-l); border-radius:2px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="audio-sample">
+              <div class="play-btn">▶</div>
+              <div style="flex:1;">
+                <div style="font-weight:700; font-size:.9375rem;">Innerschweizer Walzer</div>
+                <div style="font-size:.8125rem; color:var(--text-muted);">4:12 · Live, Luzern 2023</div>
+              </div>
+              <div style="width:120px; height:32px; background:var(--bg-warm); border-radius:var(--r-f); overflow:hidden; position:relative;">
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:2px;">
+                  <div style="width:2px; height:70%; background:var(--accent-warm); border-radius:2px;"></div>
+                  <div style="width:2px; height:45%; background:var(--accent-warm); border-radius:2px;"></div>
+                  <div style="width:2px; height:85%; background:var(--accent-warm); border-radius:2px;"></div>
+                  <div style="width:2px; height:55%; background:var(--accent-warm); border-radius:2px;"></div>
+                  <div style="width:2px; height:75%; background:var(--accent-warm); border-radius:2px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery -->
+        <div style="margin-bottom:3.5rem;">
+          <div class="section-label">Galerie</div>
+          <h2 class="display-sm" style="margin-bottom:1.5rem;">Eindrücke.</h2>
+          <div class="gallery-grid">
+            <div class="gallery-item"><div style="width:100%;height:100%;background:linear-gradient(135deg,#8B6F47,#5A4530);display:flex;align-items:center;justify-content:center;font-size:3rem;">🎪</div></div>
+            <div class="gallery-item"><div style="width:100%;height:100%;background:linear-gradient(135deg,#2C2A27,#4A4440);display:flex;align-items:center;justify-content:center;font-size:3rem;">🎵</div></div>
+            <div class="gallery-item"><div style="width:100%;height:100%;background:linear-gradient(135deg,#C4A882,#8B6F47);display:flex;align-items:center;justify-content:center;font-size:3rem;">🪗</div></div>
+            <div class="gallery-item"><div style="width:100%;height:100%;background:linear-gradient(135deg,#D4C5B0,#C4A882);display:flex;align-items:center;justify-content:center;font-size:3rem;">🎼</div></div>
+            <div class="gallery-item"><div style="width:100%;height:100%;background:linear-gradient(135deg,#EEE8DF,#D4C5B0);display:flex;align-items:center;justify-content:center;font-size:3rem;">🏔️</div></div>
+            <div class="gallery-item"><div style="width:100%;height:100%;background:linear-gradient(135deg,#4A4440,#2C2A27);display:flex;align-items:center;justify-content:center;font-size:3rem;">🎭</div></div>
+          </div>
+        </div>
+
+        <!-- Social Feed -->
+        <div>
+          <div class="section-label">Social Media</div>
+          <h2 class="display-sm" style="margin-bottom:1.5rem;">Neuestes von Instagram.</h2>
+          <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:.75rem;">
+            <div class="social-post"><div class="social-post__img" style="background:linear-gradient(135deg,#8B6F47,#5A4530); height:100%; display:flex;align-items:center;justify-content:center;font-size:2rem;">🎵</div><div class="social-post__overlay">❤️ 247</div></div>
+            <div class="social-post"><div class="social-post__img" style="background:linear-gradient(135deg,#2C2A27,#4A4440); height:100%; display:flex;align-items:center;justify-content:center;font-size:2rem;">🎪</div><div class="social-post__overlay">❤️ 183</div></div>
+            <div class="social-post"><div class="social-post__img" style="background:linear-gradient(135deg,#C4A882,#8B6F47); height:100%; display:flex;align-items:center;justify-content:center;font-size:2rem;">🪗</div><div class="social-post__overlay">❤️ 312</div></div>
+            <div class="social-post"><div class="social-post__img" style="background:linear-gradient(135deg,#D4C5B0,#C4A882); height:100%; display:flex;align-items:center;justify-content:center;font-size:2rem;">🏔️</div><div class="social-post__overlay">❤️ 156</div></div>
+            <div class="social-post"><div class="social-post__img" style="background:linear-gradient(135deg,#EEE8DF,#D4C5B0); height:100%; display:flex;align-items:center;justify-content:center;font-size:2rem;">🎼</div><div class="social-post__overlay">❤️ 201</div></div>
+          </div>
+          <div style="margin-top:1rem; text-align:center;">
+            <a href="#" class="btn btn-outline btn-sm">Auf Instagram folgen</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN — Sticky Sidebar -->
+      <div style="position:sticky; top:calc(var(--nav-h) + 2rem); display:flex; flex-direction:column; gap:1.5rem;">
+
+        <!-- Booking Card -->
+        <div class="info-card" style="background:var(--text); color:var(--bg);">
+          <div style="font-size:.6875rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; opacity:.5; margin-bottom:.75rem;">Jetzt anfragen</div>
+          <h3 style="font-size:1.375rem; font-weight:800; letter-spacing:-.02em; margin-bottom:.5rem;">Verfügbarkeit prüfen</h3>
+          <p style="font-size:.875rem; opacity:.6; margin-bottom:1.5rem; line-height:1.5;">Direkte Buchungsanfrage an die Kapelle Feuerbach — wir melden uns innerhalb von 24h.</p>
+          <a href="contact.html" class="btn btn-white w-full" style="justify-content:center; margin-bottom:.75rem;">📧 E-Mail Anfrage</a>
+          <a href="tel:+41411234567" class="btn w-full" style="justify-content:center; border:1.5px solid rgba(255,255,255,.2); color:var(--bg);">📞 Direkt anrufen</a>
+        </div>
+
+        <!-- Info Card -->
+        <div class="info-card">
+          <div class="section-label" style="margin-bottom:1rem;">Formation-Info</div>
+          <div class="info-row">
+            <div class="info-row__icon">📍</div>
+            <div><div class="info-row__label">Region</div><div class="info-row__value">Innerschweiz · Luzern</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-row__icon">🎵</div>
+            <div><div class="info-row__label">Musikstil</div><div class="info-row__value">Ländler, Schottisch, Walzer</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-row__icon">👥</div>
+            <div><div class="info-row__label">Besetzung</div><div class="info-row__value">5 Musikerinnen & Musiker</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-row__icon">📅</div>
+            <div><div class="info-row__label">Verfügbarkeit</div><div class="info-row__value">Auf Anfrage</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-row__icon">🎪</div>
+            <div><div class="info-row__label">Ideal für</div><div class="info-row__value">Konzerte, Hochzeiten, Tanzabende, Festivals, Vereinsfeste</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-row__icon">🏆</div>
+            <div><div class="info-row__label">Seit</div><div class="info-row__value">2001 (24 Jahre)</div></div>
+          </div>
+        </div>
+
+        <!-- Events -->
+        <div class="info-card">
+          <div class="section-label" style="margin-bottom:1rem;">Nächste Auftritte</div>
+          <div style="display:flex; flex-direction:column; gap:.875rem;">
+            <div style="display:flex; gap:.875rem; align-items:center;">
+              <div style="text-align:center; background:var(--bg-warm); border-radius:var(--r-md); padding:.5rem .625rem; flex-shrink:0; min-width:3rem;">
+                <div style="font-size:1.25rem; font-weight:900; line-height:1; letter-spacing:-.03em;">17</div>
+                <div style="font-size:.625rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted);">Mai</div>
+              </div>
+              <div>
+                <div style="font-weight:700; font-size:.9rem;">LAEMU Community Abend</div>
+                <div style="font-size:.75rem; color:var(--text-muted);">Luzern</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:.875rem; align-items:center;">
+              <div style="text-align:center; background:var(--bg-warm); border-radius:var(--r-md); padding:.5rem .625rem; flex-shrink:0; min-width:3rem;">
+                <div style="font-size:1.25rem; font-weight:900; line-height:1; letter-spacing:-.03em;">22</div>
+                <div style="font-size:.625rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted);">Aug</div>
+              </div>
+              <div>
+                <div style="font-weight:700; font-size:.9rem;">LAEMU Community Festival</div>
+                <div style="font-size:.75rem; color:var(--text-muted);">Schwyz</div>
+              </div>
+            </div>
+          </div>
+          <a href="events.html" class="btn btn-outline btn-sm w-full" style="justify-content:center; margin-top:1.25rem;">Alle Events</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section bg-warm">
+  <div class="container">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2.5rem; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <div class="section-label">Formation Merch</div>
+        <h2 class="display-sm fade-up">Produkte der Kapelle.</h2>
+      </div>
+      <a href="shop.html" class="btn btn-outline btn-arrow">Alle Produkte</a>
+    </div>
+    <div class="grid-4 stagger">
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#2C2A27,#4A4440); display:flex;align-items:center;justify-content:center;font-size:4rem;">💿</div>
+        <div class="product-card__body">
+          <div class="product-card__name">CD «Feuerbach Vol. 3»</div>
+          <div class="product-card__price">CHF 25</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#8B6F47,#5A4530); display:flex;align-items:center;justify-content:center;font-size:4rem;">👕</div>
+        <div class="product-card__body">
+          <div class="product-card__name">T-Shirt Feuerbach</div>
+          <div class="product-card__price">CHF 35</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#C4A882,#8B6F47); display:flex;align-items:center;justify-content:center;font-size:4rem;">📜</div>
+        <div class="product-card__body">
+          <div class="product-card__name">Konzert-Poster 2024</div>
+          <div class="product-card__price">CHF 18</div>
+        </div>
+      </div>
+      <div class="product-card fade-up">
+        <div class="product-card__img" style="background:linear-gradient(135deg,#D4C5B0,#C4A882); display:flex;align-items:center;justify-content:center;font-size:4rem;">✨</div>
+        <div class="product-card__body">
+          <div class="product-card__name">Sticker Set</div>
+          <div class="product-card__price">CHF 10</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div><div class="footer__logo">LA<span>E</span>MU</div><div class="footer__tagline">Am Puls der Ländlermusik.</div><div class="social-links" style="margin-top:1.75rem;"><a href="#" class="social-link">📷</a><a href="#" class="social-link">📘</a><a href="#" class="social-link">▶️</a><a href="#" class="social-link">🎵</a></div></div>
+      <div><div class="footer__heading">Plattform</div><ul class="footer__links"><li><a href="community.html" class="footer__link">Community</a></li><li><a href="academy.html" class="footer__link">Academy</a></li><li><a href="events.html" class="footer__link">Events</a></li><li><a href="formations.html" class="footer__link">Formationen</a></li><li><a href="shop.html" class="footer__link">Shop</a></li></ul></div>
+      <div><div class="footer__heading">LAEMU</div><ul class="footer__links"><li><a href="mission.html" class="footer__link">Mission</a></li><li><a href="contact.html" class="footer__link">Kontakt</a></li></ul></div>
+      <div><div class="footer__heading">Rechtliches</div><ul class="footer__links"><li><a href="#" class="footer__link">Datenschutz</a></li><li><a href="#" class="footer__link">AGB</a></li><li><a href="#" class="footer__link">Impressum</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>© 2025 LAEMU.</span><span>Made with ❤️ für die Schweizer Volksmusik</span></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

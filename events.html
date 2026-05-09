@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events — LAEMU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .events-hero {
+      padding-top: calc(var(--nav-h) + 5rem);
+      padding-bottom: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .events-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1920&q=80') center/cover;
+      opacity: .08;
+    }
+
+    .event-big-card {
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      position: relative;
+      min-height: 400px;
+      display: flex;
+      align-items: flex-end;
+      cursor: pointer;
+    }
+    .event-big-card__bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform .5s var(--ease);
+    }
+    .event-big-card:hover .event-big-card__bg { transform: scale(1.03); }
+    .event-big-card__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,9,8,.88) 0%, rgba(10,9,8,.3) 55%, transparent 100%);
+    }
+    .event-big-card__content {
+      position: relative; z-index: 2;
+      padding: 2rem;
+      color: #fff;
+    }
+    .event-big-card__tag { margin-bottom:.75rem; }
+
+    .event-list-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-card);
+      border-radius: var(--r-lg);
+      cursor: pointer;
+      transition: background var(--t), transform var(--t);
+    }
+    .event-list-item:hover { background: var(--bg-warm); transform: translateX(4px); }
+    .event-date-block {
+      text-align: center;
+      background: var(--bg-warm);
+      border-radius: var(--r-md);
+      padding: .625rem .5rem;
+      flex-shrink: 0;
+    }
+    .event-date-block__day { font-size: 1.5rem; font-weight: 900; letter-spacing: -.03em; line-height: 1; }
+    .event-date-block__month { font-size: .625rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+
+    .atmosphere-img {
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      position: relative;
+    }
+    .atmosphere-img img { width: 100%; height: 100%; object-fit: cover; }
+    .atmosphere-img__caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.25rem;
+      background: linear-gradient(to top, rgba(10,9,8,.7) 0%, transparent 100%);
+      color: #fff;
+      font-size: .8125rem; font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">LA<span>E</span>MU</a>
+    <ul class="nav__links">
+      <li><a href="mission.html" class="nav__link">Mission</a></li>
+      <li><a href="community.html" class="nav__link">Community</a></li>
+      <li><a href="academy.html" class="nav__link">Academy</a></li>
+      <li><a href="events.html" class="nav__link active">Events</a></li>
+      <li><a href="formations.html" class="nav__link">Formationen</a></li>
+      <li><a href="shop.html" class="nav__link">Shop</a></li>
+      <li><a href="contact.html" class="nav__link">Kontakt</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a href="member-community.html" class="nav__cta">Mitglied werden</a>
+      <button class="nav__hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="mission.html" class="nav__mobile-link">Mission</a>
+  <a href="community.html" class="nav__mobile-link">Community</a>
+  <a href="academy.html" class="nav__mobile-link">Academy</a>
+  <a href="events.html" class="nav__mobile-link">Events</a>
+  <a href="formations.html" class="nav__mobile-link">Formationen</a>
+  <a href="shop.html" class="nav__mobile-link">Shop</a>
+  <a href="contact.html" class="nav__mobile-link">Kontakt</a>
+  <a href="member-community.html" class="btn btn-primary btn-lg mt-4">Mitglied werden</a>
+</div>
+
+<!-- HERO -->
+<section class="events-hero">
+  <div class="container" style="position:relative; z-index:2;">
+    <div class="section-label" style="margin-bottom:1.5rem;">Events & Veranstaltungen</div>
+    <h1 class="display-xl fade-up" style="max-width:800px; margin-bottom:1.25rem;">
+      Erlebe Ländlermusik live.
+    </h1>
+    <p class="body-lg text-muted fade-up" style="max-width:520px; transition-delay:.1s;">
+      Alle Schweizer Volksmusik-Veranstaltungen auf einen Blick. Filtere, entdecke und sei dabei.
+    </p>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div style="background:var(--bg-warm); border-bottom:1px solid var(--border); padding:1.25rem 0; position:sticky; top:var(--nav-h); z-index:90;">
+  <div class="container">
+    <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+      <div class="filters">
+        <button class="filter-btn active">Alle</button>
+        <button class="filter-btn">Konzerte</button>
+        <button class="filter-btn">Festivals</button>
+        <button class="filter-btn">Tanz-Events</button>
+        <button class="filter-btn">Academy</button>
+        <button class="filter-btn">Privat-Events</button>
+      </div>
+      <div style="width:1px; height:24px; background:var(--border); flex-shrink:0;"></div>
+      <div class="filters">
+        <button class="filter-btn active">Alle Regionen</button>
+        <button class="filter-btn">Innerschweiz</button>
+        <button class="filter-btn">Bern</button>
+        <button class="filter-btn">Graubünden</button>
+        <button class="filter-btn">Appenzell</button>
+      </div>
+      <div style="margin-left:auto;">
+        <select class="form-select" style="width:180px; font-size:.8125rem; padding:.5rem .875rem;">
+          <option>Datum: Bald zuerst</option>
+          <option>Datum: Spät zuerst</option>
+          <option>Beliebtheit</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED EVENTS -->
+<section class="section">
+  <div class="container">
+    <div style="margin-bottom:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+      <h2 class="display-sm fade-up">Highlights</h2>
+      <span class="body-sm">148 Events gefunden</span>
+    </div>
+    <div class="grid-2 stagger" style="gap:1.5rem; margin-bottom:1.5rem;">
+      <div class="event-big-card fade-up">
+        <div class="event-big-card__bg" style="background:linear-gradient(135deg,#8B6F47,#1A1814); background-image:url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=900&q=80');"></div>
+        <div class="event-big-card__overlay"></div>
+        <div class="event-big-card__content">
+          <div class="event-big-card__tag"><span class="tag tag-accent">Festival</span></div>
+          <div style="font-size:1.5rem; font-weight:800; letter-spacing:-.02em; margin-bottom:.5rem;">Erstes LAEMU Community Festival</div>
+          <div style="opacity:.7; font-size:.875rem; margin-bottom:.5rem;">Fr–So, 22.–24. August 2025 · Schwyz</div>
+          <div style="opacity:.55; font-size:.8125rem;">3 Bühnen · 30+ Formationen · Workshops · Camping</div>
+          <div style="margin-top:1.25rem; display:flex; gap:.75rem; align-items:center;">
+            <a href="#" class="btn btn-white btn-sm">Tickets sichern</a>
+            <span style="font-size:.8125rem; opacity:.5;">🎟️ Nur noch 120 Tickets</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1.5rem;">
+        <div class="event-big-card fade-up" style="min-height:185px; transition-delay:.1s;">
+          <div class="event-big-card__bg" style="background:linear-gradient(135deg,#2C2A27,#4A4440);"></div>
+          <div class="event-big-card__overlay"></div>
+          <div class="event-big-card__content">
+            <div class="event-big-card__tag"><span class="tag" style="background:rgba(255,255,255,.15); color:#fff;">Konzert</span></div>
+            <div style="font-size:1.25rem; font-weight:800; margin-bottom:.25rem;">Innerschweizer Ländlerabend</div>
+            <div style="opacity:.65; font-size:.8125rem;">Sa, 7. Juni 2025 · Luzern, Mühlenplatz</div>
+          </div>
+        </div>
+        <div class="event-big-card fade-up" style="min-height:185px; transition-delay:.2s;">
+          <div class="event-big-card__bg" style="background:linear-gradient(135deg,#C4A882,#8B6F47);"></div>
+          <div class="event-big-card__overlay"></div>
+          <div class="event-big-card__content">
+            <div class="event-big-card__tag"><span class="tag" style="background:rgba(255,255,255,.15); color:#fff;">Lernwochenende</span></div>
+            <div style="font-size:1.25rem; font-weight:800; margin-bottom:.25rem;">Academy Lernwochenende Schwyzerörgeli</div>
+            <div style="opacity:.65; font-size:.8125rem;">Sa–So, 7.–8. Juni 2025 · Engelberg OW</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENT LIST -->
+<section class="section-sm bg-warm">
+  <div class="container">
+    <h2 class="display-sm fade-up" style="margin-bottom:2rem;">Alle bevorstehenden Events</h2>
+    <div style="display:flex; flex-direction:column; gap:.875rem;" class="stagger">
+
+      <a href="#" class="event-list-item fade-up" style="text-decoration:none; color:inherit;">
+        <div class="event-date-block"><div class="event-date-block__day">17</div><div class="event-date-block__month">Mai</div></div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.25rem;">LAEMU Community Abend Luzern</div>
+          <div style="font-size:.8125rem; color:var(--text-muted);">📍 Luzern · Konzert · Trio Sonnenberg</div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <span class="tag tag-warm">Kostenlos</span>
+        </div>
+      </a>
+
+      <a href="#" class="event-list-item fade-up" style="text-decoration:none; color:inherit;">
+        <div class="event-date-block"><div class="event-date-block__day">24</div><div class="event-date-block__month">Mai</div></div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.25rem;">Frühlingskonzert Appenzell</div>
+          <div style="font-size:.8125rem; color:var(--text-muted);">📍 Appenzell · Konzert · 4 Formationen</div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-weight:700; font-size:.9375rem;">CHF 25</div>
+        </div>
+      </a>
+
+      <a href="#" class="event-list-item fade-up" style="text-decoration:none; color:inherit;">
+        <div class="event-date-block"><div class="event-date-block__day">31</div><div class="event-date-block__month">Mai</div></div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.25rem;">Tanz und Ländler Abend Bern</div>
+          <div style="font-size:.8125rem; color:var(--text-muted);">📍 Bern · Tanzabend · Kapelle Heidiland</div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-weight:700; font-size:.9375rem;">CHF 18</div>
+        </div>
+      </a>
+
+      <a href="#" class="event-list-item fade-up" style="text-decoration:none; color:inherit;">
+        <div class="event-date-block"><div class="event-date-block__day">07</div><div class="event-date-block__month">Jun</div></div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.25rem;">Innerschweizer Ländlerabend</div>
+          <div style="font-size:.8125rem; color:var(--text-muted);">📍 Luzern · Konzert · Ländlerkapelle Feuerbach</div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-weight:700; font-size:.9375rem;">CHF 35</div>
+        </div>
+      </a>
+
+      <a href="#" class="event-list-item fade-up" style="text-decoration:none; color:inherit;">
+        <div class="event-date-block"><div class="event-date-block__day">14</div><div class="event-date-block__month">Jun</div></div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.25rem;">Jugendfest Schwyz — Volksmusik-Bühne</div>
+          <div style="font-size:.8125rem; color:var(--text-muted);">📍 Schwyz · Festival · Mehrere Formationen</div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <span class="tag tag-warm">Kostenlos</span>
+        </div>
+      </a>
+
+      <a href="#" class="event-list-item fade-up" style="text-decoration:none; color:inherit;">
+        <div class="event-date-block"><div class="event-date-block__day">28</div><div class="event-date-block__month">Jun</div></div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.25rem;">Alp-Konzert Braunwald</div>
+          <div style="font-size:.8125rem; color:var(--text-muted);">📍 Braunwald GL · Open Air · Quartett Alpenrosen</div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-weight:700; font-size:.9375rem;">CHF 20</div>
+        </div>
+      </a>
+
+      <a href="#" class="event-list-item fade-up" style="text-decoration:none; color:inherit;">
+        <div class="event-date-block"><div class="event-date-block__day">05</div><div class="event-date-block__month">Jul</div></div>
+        <div>
+          <div style="font-weight:700; margin-bottom:.25rem;">Berner Volksmusik-Nacht</div>
+          <div style="font-size:.8125rem; color:var(--text-muted);">📍 Bern · Konzert · 3 Formationen</div>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-weight:700; font-size:.9375rem;">CHF 30</div>
+        </div>
+      </a>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <button class="btn btn-outline">Mehr Events laden</button>
+    </div>
+  </div>
+</section>
+
+<!-- PAST IMPRESSIONS -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Impressionen</div>
+      <h2 class="display-md fade-up">Unvergessliche Momente.</h2>
+      <p class="body-lg text-muted fade-up" style="max-width:480px; margin:.75rem auto 0; transition-delay:.1s;">Was passiert, wenn Ländlermusik auf ein begeistertes Publikum trifft.</p>
+    </div>
+    <div class="grid-3 stagger" style="gap:1.25rem;">
+      <div class="atmosphere-img fade-up" style="grid-row:span 2; aspect-ratio:auto; min-height:400px;">
+        <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=600&q=80" alt="Konzert Atmosphäre">
+        <div class="atmosphere-img__caption">Ländlerabend Luzern, 2024</div>
+      </div>
+      <div class="atmosphere-img fade-up" style="transition-delay:.1s;">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=600&q=80" alt="Live Musik">
+        <div class="atmosphere-img__caption">Community Festival 2024</div>
+      </div>
+      <div class="atmosphere-img fade-up" style="transition-delay:.15s;">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Menschen beim Event">
+        <div class="atmosphere-img__caption">Frühlingskonzert Appenzell</div>
+      </div>
+      <div class="atmosphere-img fade-up" style="transition-delay:.2s;">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&q=80" alt="Schweizer Bergwelt">
+        <div class="atmosphere-img__caption">Alp-Konzert Braunwald</div>
+      </div>
+      <div class="atmosphere-img fade-up" style="transition-delay:.25s;">
+        <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=600&q=80" alt="Musiker auf der Bühne">
+        <div class="atmosphere-img__caption">Volksmusik-Nacht Bern</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION CTA -->
+<section style="background:var(--bg-warm); padding:clamp(4rem,8vw,8rem) 0;">
+  <div class="container">
+    <div class="grid-2" style="gap:3rem; align-items:center;">
+      <div class="fade-up">
+        <div class="section-label">Für Veranstalter</div>
+        <h2 class="display-md" style="margin-bottom:1rem;">Planst du selber einen Anlass?</h2>
+        <p class="body-lg text-muted" style="margin-bottom:2rem;">Finde die passende Formation für deinen Event — direkt auf LAEMU. Filtere nach Region, Stil und Verfügbarkeit und nimm Kontakt auf.</p>
+        <a href="formations.html" class="btn btn-primary btn-lg btn-arrow">Formationen entdecken</a>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s;">
+        <div style="background:var(--bg-card); border-radius:var(--r-xl); padding:2.5rem;">
+          <div class="section-label">Exklusive Events</div>
+          <h3 class="display-sm" style="margin-bottom:1rem;">LAEMU Mitglieder-Events</h3>
+          <p class="body-md text-muted" style="margin-bottom:1.5rem;">Als Community-Mitglied erhältst du Zugang zu exklusiven LAEMU-Events — Lernwochenenden, Backstage-Erlebnisse, Member-Konzerte und mehr.</p>
+          <a href="member-community.html" class="btn btn-outline btn-arrow">Community beitreten</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENT SUBMIT CTA -->
+<section style="padding:clamp(4rem,8vw,8rem) 0; text-align:center;">
+  <div class="container container-sm">
+    <div class="script fade-in" style="color:var(--accent); font-size:2rem; margin-bottom:1rem;">Dein Event auf LAEMU</div>
+    <h2 class="display-md fade-up" style="margin-bottom:1rem;">Veranstaltung eintragen.</h2>
+    <p class="body-lg text-muted fade-up" style="max-width:460px; margin:0 auto 2.5rem; transition-delay:.1s;">
+      Erreichst du tausende Ländlermusik-Begeisterte in der Schweiz. Kostenlos für LAEMU-Mitglieder.
+    </p>
+    <a href="contact.html" class="btn btn-primary btn-lg fade-up" style="transition-delay:.2s;">Event einreichen</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div><div class="footer__logo">LA<span>E</span>MU</div><div class="footer__tagline">Am Puls der Ländlermusik.</div><div class="social-links" style="margin-top:1.75rem;"><a href="#" class="social-link">📷</a><a href="#" class="social-link">📘</a><a href="#" class="social-link">▶️</a><a href="#" class="social-link">🎵</a></div></div>
+      <div><div class="footer__heading">Plattform</div><ul class="footer__links"><li><a href="community.html" class="footer__link">Community</a></li><li><a href="academy.html" class="footer__link">Academy</a></li><li><a href="events.html" class="footer__link">Events</a></li><li><a href="formations.html" class="footer__link">Formationen</a></li><li><a href="shop.html" class="footer__link">Shop</a></li></ul></div>
+      <div><div class="footer__heading">LAEMU</div><ul class="footer__links"><li><a href="mission.html" class="footer__link">Mission</a></li><li><a href="contact.html" class="footer__link">Kontakt</a></li></ul></div>
+      <div><div class="footer__heading">Rechtliches</div><ul class="footer__links"><li><a href="#" class="footer__link">Datenschutz</a></li><li><a href="#" class="footer__link">AGB</a></li><li><a href="#" class="footer__link">Impressum</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>© 2025 LAEMU.</span><span>Made with ❤️ für die Schweizer Volksmusik</span></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
